@@ -21,6 +21,7 @@ public class Product {
     private String _genre;
     private ArrayList<Musician> _involvedArtists;
     private ArrayList<String> _usedInstruments;
+    private int _productStocks;
 
     public String get_code() {
         return _code;
@@ -108,5 +109,13 @@ public class Product {
 
     public void set_usedInstruments(ArrayList<String> _usedInstruments) {
         this._usedInstruments = _usedInstruments;
+    }
+
+    public int get_productStocks() {
+        return _productStocks;
+    }
+
+    public void set_productStocks(int _productStocks) {
+        this._productStocks = _productStocks;
     }
 }
