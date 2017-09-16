@@ -8,8 +8,8 @@ import java.util.ArrayList;
  */
 public class Musician {
 
-    protected String _name;
-    protected String _mainGenre;
-    protected LocalDate _birthDate;
-    protected ArrayList<String> _instruments;
+    private String _name;
+    private String _mainGenre;
+    private LocalDate _birthDate;
+    private ArrayList<String> _instruments;
 }
