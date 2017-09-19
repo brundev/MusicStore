@@ -1,20 +1,24 @@
 package Views;
 
+import Controllers.CatalogController;
+import Models.Catalog;
+import Models.Product;
+import SupportClasses.Observer;
+import SupportClasses.Subject;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Observable;
-import java.util.Observer;
+
+
 
 /**
  * Created by stefano on 16/09/17.
  */
-public class MainView implements ActionListener, Observer {
+public class MainView extends Observer{
     private JPanel mainPanel;
     private JButton cartButton;
     private JFormattedTextField usernameText;
@@ -24,6 +28,8 @@ public class MainView implements ActionListener, Observer {
     private JToolBar mainToolbar;
     private JLabel titleLabel;
     private JScrollPane scrollPane;
+    private Catalog _catalog;
+    DefaultTableModel _model;
 
     public static void main(String args[])
     {
@@ -36,6 +42,11 @@ public class MainView implements ActionListener, Observer {
     }
 
     public MainView()
+    {
+        SetupView();
+    }
+
+    public void SetupView()
     {
         ImageIcon imageIcon = new ImageIcon(getClass().getResource("resources/cart.png"));
         Image image = imageIcon.getImage();
@@ -54,49 +65,33 @@ public class MainView implements ActionListener, Observer {
         cartButton.setFocusPainted(false);
         loginButton.setFocusPainted(false);
         loginButton.setBorder(lineBorder);
-        int nmbrRows = 25;
-        TableColumn testColumn = new TableColumn();
-        testColumn.setHeaderValue((Object)String.valueOf("test"));
-        DefaultTableModel model = new DefaultTableModel(1, 1);
-        catalogTable.addColumn(testColumn);
-        catalogTable = new JTable(model);
-        Object row[] = {"test"};
-        model.addRow(row);
+        //TableColumn testColumn = new TableColumn();
+        //testColumn.setHeaderValue(String.valueOf("test"));
+
+        //catalogTable.addColumn(testColumn);
+        _model = new DefaultTableModel(1, 1);
+        catalogTable = new JTable(_model);
+        _catalog = new Catalog();
+        _catalog.attach(this);
+        CatalogController _catalogController = new CatalogController(_catalog);
+
         catalogTable.setVisible(true);
         scrollPane.setViewportView(catalogTable);
 
-        cartButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                //JOptionPane.showMessageDialog(null, "ayy lmao");
-                //CartView cart = new CartView();
-                CartView cartFrame = new CartView();
-                //cartFrame.setVisible(true);
-            }
-        });
-
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                JOptionPane.showMessageDialog(null, "ayy lmao");
-            }
-        });
+        cartButton.addActionListener(  e -> new CartView() );
+        loginButton.addActionListener( e -> JOptionPane.showMessageDialog(null, "ayy lmao") ); //TODO gestire evento per login
     }
 
     @Override
-    public void actionPerformed(ActionEvent e)
+    public void update(Subject obj)
     {
-
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-
-    }
-
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
+        _model.setRowCount(0);
+        Object row[];
+        _catalog = (Catalog)obj;
+        for (Product p : _catalog.getCatalogProducts())
+        {
+            row = new Object[]{p.get_title()};
+            _model.addRow(row);
+        }
     }
 }
