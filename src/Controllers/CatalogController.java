@@ -17,7 +17,8 @@ public class CatalogController
 
     public void set_productList()
     {
-        //simulo una query aggiungendo dei prodotti alla lista a cazzo
+        //TODO query per ottenere la lista dei prodotti
+        //simulo una query aggiungendo dei prodotti alla lista
         Product p1 = new Product();
         Product p2 = new Product();
         Product p3 = new Product();

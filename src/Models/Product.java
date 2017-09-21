@@ -15,16 +15,35 @@ public class Product extends Subject{
 
     private String _code;
     private String _title;
-    private ArrayList<String> _songList;
+    private ArrayList<Song> _trackList;
     private BufferedImage _coverImage; //per prelevare immagine da un URL
     private float _price;
     private LocalDateTime _firstAddedInStore;
-    private String _artist;
-    private Musician _description;
+    private String _description;
+    private Musician _artist;
     private String _genre;
     private ArrayList<Musician> _involvedArtists;
     private ArrayList<String> _usedInstruments;
     private int _productStocks;
+
+    public Product()
+    {
+
+    }
+
+    public Product (String code, String title, ArrayList<Song> trackList, BufferedImage coverImage, float price, LocalDateTime firstAddedInStore, String description, Musician artist, String genre, ArrayList<Musician> involvedArtists, ArrayList<String> usedInstruments, int productStocks) {
+        _code = code;
+        _title = title;
+        _trackList = trackList;
+        _coverImage = coverImage;
+        _price = price;
+        _firstAddedInStore = firstAddedInStore;
+        _artist = artist;
+        _genre = genre;
+        _involvedArtists = involvedArtists;
+        _usedInstruments = usedInstruments;
+        _productStocks = productStocks;
+    }
 
     public void set_code(String _code) {
         this._code = _code;
@@ -37,9 +56,9 @@ public class Product extends Subject{
         notifyAllObservers();
     }
 
-    public void set_songList(ArrayList<String> _songList) {
+    public void set_trackList(ArrayList<Song> _songList) {
 
-        this._songList = _songList;
+        this._trackList = _songList;
         notifyAllObservers();
     }
 
@@ -61,13 +80,13 @@ public class Product extends Subject{
         notifyAllObservers();
     }
 
-    public void set_artist(String _artist) {
+    public void set_artist(Musician _artist) {
 
         this._artist = _artist;
         notifyAllObservers();
     }
 
-    public void set_description(Musician _description) {
+    public void set_description(String _description) {
 
         this._description = _description;
         notifyAllObservers();
@@ -105,8 +124,8 @@ public class Product extends Subject{
         return _title;
     }
 
-    public ArrayList<String> get_songList() {
-        return _songList;
+    public ArrayList<Song> get_songList() {
+        return _trackList;
     }
 
     public BufferedImage get_coverImage() {
@@ -121,11 +140,11 @@ public class Product extends Subject{
         return _firstAddedInStore;
     }
 
-    public String get_artist() {
+    public Musician get_artist() {
         return _artist;
     }
 
-    public Musician get_description() {
+    public String get_description() {
         return _description;
     }
 
