@@ -11,6 +11,7 @@ public class Song {
     private String _title;
     private Duration _duration;
     private Date _releaseDate;
+    private MusicalGenre _genre;
 
 
     public String get_id() {
@@ -43,5 +44,13 @@ public class Song {
 
     public void set_releaseDate(Date _releaseDate) {
         this._releaseDate = _releaseDate;
+    }
+
+    public MusicalGenre get_genre() {
+        return _genre;
+    }
+
+    public void set_genre(MusicalGenre _genre) {
+        this._genre = _genre;
     }
 }
