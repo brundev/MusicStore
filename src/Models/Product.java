@@ -15,7 +15,7 @@ public class Product extends Subject{
 
     private String _code;
     private String _title;
-    private ArrayList<Song> _trackList;
+    private ArrayList<String> _trackList;
     private BufferedImage _coverImage; //per prelevare immagine da un URL
     private float _price;
     private LocalDateTime _firstAddedInStore;
@@ -31,7 +31,7 @@ public class Product extends Subject{
 
     }
 
-    public Product (String code, String title, ArrayList<Song> trackList, BufferedImage coverImage, float price, LocalDateTime firstAddedInStore, String description, Musician artist, String genre, ArrayList<Musician> involvedArtists, ArrayList<String> usedInstruments, int productStocks) {
+    public Product (String code, String title, ArrayList<String> trackList, BufferedImage coverImage, float price, LocalDateTime firstAddedInStore, String description, Musician artist, String genre, ArrayList<Musician> involvedArtists, ArrayList<String> usedInstruments, int productStocks) {
         _code = code;
         _title = title;
         _trackList = trackList;
@@ -56,7 +56,7 @@ public class Product extends Subject{
         notifyAllObservers();
     }
 
-    public void set_trackList(ArrayList<Song> _songList) {
+    public void set_trackList(ArrayList<String> _songList) {
 
         this._trackList = _songList;
         notifyAllObservers();
@@ -124,7 +124,7 @@ public class Product extends Subject{
         return _title;
     }
 
-    public ArrayList<Song> get_songList() {
+    public ArrayList<String> get_songList() {
         return _trackList;
     }
 
