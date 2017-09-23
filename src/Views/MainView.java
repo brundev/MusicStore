@@ -3,6 +3,7 @@ package Views;
 import Controllers.CatalogController;
 import Models.Catalog;
 import Models.Product;
+import SupportClasses.DBConnSingleton;
 import SupportClasses.Observer;
 import SupportClasses.Subject;
 
@@ -39,6 +40,7 @@ public class MainView extends Observer{
         frame.pack();
         frame.setSize(900,900);
         frame.setVisible(true);
+        SetupDBConn();
     }
 
     public MainView()
@@ -77,7 +79,8 @@ public class MainView extends Observer{
         //testColumn.setHeaderValue(String.valueOf("test"));
 
         //catalogTable.addColumn(testColumn);
-        _model = new DefaultTableModel(1, 1);
+        String[] columnNames = {"Titolo", "Immagine", "Prezzo", "Descrizione", "Autore", "Genere"};
+        _model = new DefaultTableModel(null, columnNames);
         catalogTable = new JTable(_model);
         _catalog = new Catalog();
         _catalog.attach(this);
@@ -87,7 +90,13 @@ public class MainView extends Observer{
         scrollPane.setViewportView(catalogTable);
 
         cartButton.addActionListener(  e -> new CartView() );
-        loginButton.addActionListener( e -> JOptionPane.showMessageDialog(null, "ayy lmao") ); //TODO gestire evento per login
+        //TODO gestire evento per login
+        //loginButton.addActionListener( e -> JOptionPane.showMessageDialog(null, "ayy lmao") );
+    }
+
+    public static void SetupDBConn()
+    {
+        DBConnSingleton.getInstance();
     }
 
     @Override
@@ -98,7 +107,7 @@ public class MainView extends Observer{
         _catalog = (Catalog)obj;
         for (Product p : _catalog.getCatalogProducts())
         {
-            row = new Object[]{p.get_title()};
+            row = new Object[]{p.get_title(), p.get_coverImage(), p.get_price() + " €", p.get_description(), p.get_artist(), p.get_genre()};
             _model.addRow(row);
         }
     }
