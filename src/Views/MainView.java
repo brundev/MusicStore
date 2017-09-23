@@ -40,11 +40,11 @@ public class MainView extends Observer{
         frame.pack();
         frame.setSize(900,900);
         frame.setVisible(true);
-        SetupDBConn();
     }
 
     public MainView()
     {
+        SetupDBConn();
         SetupView();
     }
 
