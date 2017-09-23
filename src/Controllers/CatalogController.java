@@ -27,34 +27,22 @@ public class CatalogController
     }
 
     public void setProductList() throws SQLException {
-        //TODO query per ottenere la lista dei prodotti
-        //simulo una query aggiungendo dei prodotti alla lista
-        /*Product p1 = new Product();
-        Product p2 = new Product();
-        Product p3 = new Product();
-        p1.set_title("shadilay");
-        p2.set_title("brainpower");
-        p3.set_title("boh");
-        _catalog.add(p1);
-        _catalog.add(p2);
-        _catalog.add(p3);*/
 
         Connection conn = DBConnSingleton.getConn();
         Statement stmt = conn.createStatement() ;
-        String query = "select * from Product  ;" ;
+        String query = "select * from products as p join musician as m on p.artist = m.id;" ;
         ResultSet rs = stmt.executeQuery(query) ;
 
         Product p;
         while(rs.next())
         {
             p = new Product();
-            p.set_title(rs.getString(1));
+            p.set_title(rs.getString(2));
             //TODO gestire immagine di copertina
-            //p.set_coverImage( );
-            p.set_price(rs.getFloat(3));
-            p.set_description(rs.getString(4));
-            //p.set_artist(rs.getString(5));
-            p.set_genre(rs.getString(6));
+            p.set_price(rs.getFloat(5));
+            p.set_description(rs.getString(7));
+            p.set_genre(rs.getString(9));
+            //p.set_artist(rs.getString(14));
             _catalog.add(p);
         }
     }
