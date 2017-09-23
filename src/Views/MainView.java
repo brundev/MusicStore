@@ -54,16 +54,24 @@ public class MainView extends Observer{
         cartButton.setIcon(imageIcon);
         cartButton.setSize(30, 100);
         cartButton.setText("");
+
         usernameText.setSize(40,300);
         passwordText.setSize(40,300);
+
         usernameText.setText("username");
         passwordText.setText("password");
+
         LineBorder lineBorder = new LineBorder(Color.white, 2, true);
         lineBorder.getRoundedCorners();
+
         usernameText.setBorder(lineBorder);
+
         passwordText.setBorder(lineBorder);
+
         cartButton.setFocusPainted(false);
+
         loginButton.setFocusPainted(false);
+
         loginButton.setBorder(lineBorder);
         //TableColumn testColumn = new TableColumn();
         //testColumn.setHeaderValue(String.valueOf("test"));
