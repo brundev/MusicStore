@@ -31,7 +31,7 @@ public class CartController {
 
     //TODO
     public void setCart() throws SQLException{
-
+        /*
         String cartUser = _cart.get_user().get_username();
 
         Connection conn = DBConnSingleton.getConn();
@@ -67,7 +67,7 @@ public class CartController {
             _cart.addToCart(p);
         }
 
-
+*/
     }
 
 

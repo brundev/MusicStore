@@ -16,14 +16,19 @@ public class CatalogController
         _catalog = catalog;
         try
         {
-            String q = "select * from products as p join musician as m on p.artist = m.id;";
-            PreparedStatement pst = DBConnSingleton.getConn().prepareStatement(q);
-            setProductList(pst);
+            setProductList();
         }
         catch (SQLException e)
         {
             e.printStackTrace();
         }
+    }
+
+    public void setProductList() throws SQLException
+    {
+        String q = "select * from products as p join musician as m on p.artist = m.id;";
+        PreparedStatement pst = DBConnSingleton.getConn().prepareStatement(q);
+        setProductList(pst);
     }
 
     public void setProductList(PreparedStatement pst) throws SQLException
@@ -48,63 +53,37 @@ public class CatalogController
 
     public void getProductByGenre(String genre) throws SQLException
     {
-        try
-        {
             String q = "select * from products as p join musician as m on p.artist = m.id where p.genre ilike ?;";
             PreparedStatement pst = DBConnSingleton.getConn().prepareStatement(q);
             pst.setString(1, "%" + genre + "%");
             setProductList(pst);
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
     }
 
     public void getProductByPrice(String price) throws SQLException
     {
-        try
-        {
             String q = "select * from products as p join musician as m on p.artist = m.id where p.price <= ?;";
             PreparedStatement pst = DBConnSingleton.getConn().prepareStatement(q);
             pst.setBigDecimal(1, new BigDecimal(price));
             setProductList(pst);
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
     }
 
     public void getProductByTitle(String title) throws SQLException
     {
-        try
-        {
             String q = "select * from products as p join musician as m on p.artist = m.id where p.title ilike ?;";
             PreparedStatement pst = DBConnSingleton.getConn().prepareStatement(q);
-            pst.setString(1, "%" + title + "%");
+            pst.setString(1, title + "%");
             setProductList(pst);
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
+
     }
 
     public void getProductByArtist(String name) throws SQLException
     {
-        try
-        {
             String q = "select * from products as p join musician as m on p.artist = m.id where m.name ilike ? or array_to_string(involvedartists, ?) ilike ?";
             PreparedStatement pst = DBConnSingleton.getConn().prepareStatement(q);
-            pst.setString(1, "%" + name + "%");
+            pst.setString(1,name + "%");
             pst.setString(2,",");
-            pst.setString(3, "%" + name + "%");
+            pst.setString(3,"%" + name + "%");
             setProductList(pst);
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
+
     }
 }
