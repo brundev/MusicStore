@@ -73,7 +73,7 @@ public class CartController {
 
     public void addToCart(Product p){
 
-        String cartUser = _cart.get_user().get_username();
+        /*String cartUser = _cart.get_user().get_username();
 
         try {
             Connection conn = DBConnSingleton.getConn();
@@ -103,7 +103,7 @@ public class CartController {
         }catch (SQLException e){
             e.printStackTrace();
         }
-
+*/
     }
 
 
