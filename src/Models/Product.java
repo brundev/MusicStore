@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Product extends Subject{
 
-    private String _code;
+    private int _code;
     private String _title;
     private ArrayList<String> _trackList;
     private String _coverImage; //per prelevare immagine da un URL
@@ -32,7 +32,7 @@ public class Product extends Subject{
 
     }
 
-    public Product (String code, String title, ArrayList<String> trackList, String coverImage, float price, LocalDateTime firstAddedInStore, String description, Musician artist, String genre, ArrayList<Musician> involvedArtists, ArrayList<String> usedInstruments, int productStocks) {
+    public Product (int code, String title, ArrayList<String> trackList, String coverImage, float price, LocalDateTime firstAddedInStore, String description, Musician artist, String genre, ArrayList<Musician> involvedArtists, ArrayList<String> usedInstruments, int productStocks) {
         _code = code;
         _title = title;
         _trackList = trackList;
@@ -47,7 +47,7 @@ public class Product extends Subject{
         _productStocks = productStocks;
     }
 
-    public void set_code(String _code) {
+    public void set_code(int _code) {
         this._code = _code;
         notifyAllObservers();
     }
@@ -118,7 +118,7 @@ public class Product extends Subject{
         notifyAllObservers();
     }
 
-    public String get_code() {
+    public int get_code() {
         return _code;
     }
 

@@ -54,10 +54,9 @@ public class MainView extends Observer{
     {
         SetupDBConn();
         SetupView();
-        Cart c = new Cart();
         User u = new User();
+        Cart c = new Cart(u);
         u.set_username("john");
-        c.set_user(u);
         CartController cc = new CartController(c);
     }
 

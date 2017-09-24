@@ -59,7 +59,7 @@ public class CartController {
             rs.next();
 
             p = new Product();
-            p.set_code(Integer.toString(b[i]));
+            p.set_code((b[i]));
             p.set_title(rs.getString(1));
             p.set_price(rs.getFloat(2));
             p.set_coverImage(rs.getString(3));
@@ -70,21 +70,40 @@ public class CartController {
 
 
 
-   /* public void addToCart(Product p){
+    public void addToCart(Product p){
 
+        String cartUser = _cart.get_user().get_username();
 
         try {
             Connection conn = DBConnSingleton.getConn();
             String query = "select products from sale where sale.username ILIKE ?;";
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, );
+            stmt.setString(1,cartUser);
             ResultSet rs = stmt.executeQuery();
+            rs.next();
+
+            Array a = rs.getArray(1);
+            Integer b []= (Integer[])a.getArray();
+            Integer c[] = new Integer[b.length+1];
+
+            for(int i=0;i<b.length;i++){
+                c[i]=b[i];
+            }
+
+            c[b.length+1]=p.get_code();
+
+            query = "UPDATE sale SET products = ? where sale.username ILIKE ?;";
+            stmt = conn.prepareStatement(query);
+            stmt.setString(1,new String(conn.createArrayOf(a.getBaseTypeName(),c)));
+            stmt.executeUpdate();
+
+
 
         }catch (SQLException e){
             e.printStackTrace();
         }
 
-    }*/
+    }
 
 
     //TODO
