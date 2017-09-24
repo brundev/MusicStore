@@ -13,10 +13,21 @@ public class Catalog extends Subject{
         notifyAllObservers();
     }
 
+    public void add(ArrayList<Product> list)
+    {
+
+    }
+
+
     public void remove(Product p)
     {
         _catalogList.remove(p);
         //notifyAllObservers();
+    }
+
+    public void clear()
+    {
+        _catalogList.clear();
     }
 
     public ArrayList<Product> getCatalogProducts()
