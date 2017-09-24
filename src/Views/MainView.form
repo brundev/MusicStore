@@ -112,6 +112,25 @@
             <border type="none"/>
             <children/>
           </grid>
+          <component id="cfb7a" class="javax.swing.JButton" binding="registerButton">
+            <constraints/>
+            <properties>
+              <background color="-1907998"/>
+              <maximumSize width="100" height="28"/>
+              <minimumSize width="70" height="28"/>
+              <selected value="false"/>
+              <text value="REGISTRATI"/>
+            </properties>
+          </component>
+          <grid id="5a6f2" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints/>
+            <properties>
+              <background color="-1907998"/>
+              <maximumSize width="30" height="2147483647"/>
+            </properties>
+            <border type="none"/>
+            <children/>
+          </grid>
           <component id="fce3c" class="javax.swing.JButton" binding="cartButton">
             <constraints/>
             <properties>
