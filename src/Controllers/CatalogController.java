@@ -15,7 +15,7 @@ public class CatalogController
 
     public CatalogController(Catalog catalog)
     {
-        _catalog = new Catalog();
+        _catalog = catalog;
         try
         {
             setProductList();
