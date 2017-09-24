@@ -18,7 +18,7 @@ public class CatalogController
         _catalog = catalog;
         try
         {
-            setProductList();
+            setProductList("select * from products as p join musician as m on p.artist = m.id;");
         }
         catch (SQLException e)
         {
@@ -26,12 +26,14 @@ public class CatalogController
         }
     }
 
-    public void setProductList() throws SQLException {
+    public void setProductList(String q) throws SQLException
+    {
 
         Connection conn = DBConnSingleton.getConn();
         Statement stmt = conn.createStatement() ;
-        String query = "select * from products as p join musician as m on p.artist = m.id;" ;
+        String query = q;
         ResultSet rs = stmt.executeQuery(query) ;
+        _catalog.clear();
 
         Product p;
         while(rs.next())
@@ -47,17 +49,19 @@ public class CatalogController
         }
     }
 
-    public void getProductByGenre()
+    public void getProductByGenre(String genre)
     {
-        //TODO query
+        try
+        {
+            setProductList("select * from products as p join musician as m on p.artist = m.id where p.genre ="+ genre +";");
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public void getProductByArtist()
-    {
-        //TODO query
-    }
-
-    public void getProductByInvolvedArtist()
     {
         //TODO query
     }
