@@ -29,6 +29,7 @@ public class MainView extends Observer{
     private JToolBar mainToolbar;
     private JLabel titleLabel;
     private JScrollPane scrollPane;
+    private JComboBox comboBox;
     private Catalog _catalog;
     DefaultTableModel _model;
 
@@ -75,8 +76,6 @@ public class MainView extends Observer{
         loginButton.setFocusPainted(false);
 
         loginButton.setBorder(lineBorder);
-        //TableColumn testColumn = new TableColumn();
-        //testColumn.setHeaderValue(String.valueOf("test"));
 
         //catalogTable.addColumn(testColumn);
         String[] columnNames = {"Titolo", "Immagine", "Prezzo", "Descrizione", "Autore", "Genere"};
@@ -89,9 +88,9 @@ public class MainView extends Observer{
         catalogTable.setVisible(true);
         scrollPane.setViewportView(catalogTable);
 
-        cartButton.addActionListener(  e -> new CartView() );
+        cartButton.addActionListener(e -> new CartView());
         //TODO gestire evento per login
-        //loginButton.addActionListener( e -> JOptionPane.showMessageDialog(null, "ayy lmao") );
+        loginButton.addActionListener( e -> JOptionPane.showMessageDialog(null, "ayy lmao") );
     }
 
     public static void SetupDBConn()
