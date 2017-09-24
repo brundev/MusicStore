@@ -131,7 +131,8 @@ public class MainView extends Observer{
     {
         if(_loginManager.checkUser(usernameText.getText(), passwordText.getText()))
         {
-            _cart = new Cart(_loginManager.getUser());
+            Customer c = _loginManager.getUser();
+            _cart = new Cart(c);
             _cartController = new CartController(_cart);
             JOptionPane.showMessageDialog(null, "loggato");
         }
