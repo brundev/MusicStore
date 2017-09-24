@@ -2,10 +2,7 @@ package Views;
 
 import Controllers.CartController;
 import Controllers.CatalogController;
-import Models.Cart;
-import Models.Catalog;
-import Models.Product;
-import Models.User;
+import Models.*;
 import SupportClasses.DBConnSingleton;
 import SupportClasses.LoginManager;
 import SupportClasses.Observer;
@@ -43,6 +40,7 @@ public class MainView extends Observer{
     private DefaultTableModel _model;
     private LoginManager _loginManager;
     private Cart _cart;
+    private CartController _cartController;
 
     public static void main(String args[])
     {
@@ -58,11 +56,7 @@ public class MainView extends Observer{
     {
         SetupDBConn();
         SetupView();
-        Cart c = new Cart(new User());
-        User u = new User();
         _loginManager = new LoginManager();
-        u.set_username("john");
-        CartController cc = new CartController(c);
     }
 
     public void SetupView()
@@ -138,6 +132,8 @@ public class MainView extends Observer{
         if(_loginManager.checkUser(usernameText.getText(), passwordText.getText()))
         {
             _cart = new Cart(_loginManager.getUser());
+            _cartController = new CartController(_cart);
+            JOptionPane.showMessageDialog(null, "loggato");
         }
         else
         {
