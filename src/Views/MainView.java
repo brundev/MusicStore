@@ -1,8 +1,11 @@
 package Views;
 
+import Controllers.CartController;
 import Controllers.CatalogController;
+import Models.Cart;
 import Models.Catalog;
 import Models.Product;
+import Models.User;
 import SupportClasses.DBConnSingleton;
 import SupportClasses.Observer;
 import SupportClasses.Subject;
@@ -47,6 +50,11 @@ public class MainView extends Observer{
     {
         SetupDBConn();
         SetupView();
+        Cart c = new Cart();
+        User u = new User();
+        u.set_username("john");
+        c.set_user(u);
+        CartController cc = new CartController(c);
     }
 
     public void SetupView()
