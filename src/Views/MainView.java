@@ -16,6 +16,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.sql.SQLException;
 
 
@@ -105,6 +106,14 @@ public class MainView extends Observer{
 
         catalogTable.setVisible(true);
         scrollPane.setViewportView(catalogTable);
+
+        catalogTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int row = catalogTable.rowAtPoint(evt.getPoint());
+                new ProductView(_catalog.getCatalogProducts().get(row));
+            }
+        });
 
         cartButton.addActionListener(e -> new CartView());
         //TODO gestire evento per login
