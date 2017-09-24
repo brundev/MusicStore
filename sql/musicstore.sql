@@ -19,9 +19,9 @@ CREATE TABLE Products (
 	price NUMERIC(5,2),
 	firstadded DATE,
 	description VARCHAR(512), 
-    artist NUMERIC,
+  artist NUMERIC,
 	genre VARCHAR(20),
-    involvedartists TEXT ARRAY, 
+  involvedartists TEXT ARRAY,
 	usedinstruments TEXT ARRAY, 
 	productstocks integer
 );

@@ -84,7 +84,7 @@ public class MainView extends Observer{
         catalogTable = new JTable(_model);
         _catalog = new Catalog();
         _catalog.attach(this);
-        CatalogController _catalogController = new CatalogController(_catalog);
+        CatalogController _catalogController = new CatalogController();
 
         catalogTable.setVisible(true);
         scrollPane.setViewportView(catalogTable);
