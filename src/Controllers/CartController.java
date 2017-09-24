@@ -42,30 +42,32 @@ public class CartController {
 
         rs.next();
 
-        ArrayList<Integer> a = (ArrayList<Integer>) rs.getObject(1);
-
-        /*Array a = rs.getArray(1);
-        Integer b []= (Integer[])a.getArray();*/
+        Array a = rs.getArray(1);
+        Integer b []= (Integer[])a.getArray();
 
         Product p;
 
-        for(int i=0;i<a.size();i++)
+        for(int i=0;i<b.length;i++)
         {
 
             query = "select title,price,coverimage from Products where id = ?;";
             stmt = conn.prepareStatement(query);
-            stmt.setInt( 1,a.get(i));
+            stmt.setInt( 1,b[i]);
             rs = stmt.executeQuery();
 
             rs.next();
 
             p = new Product();
-            p.set_code((a.get(i)));
+            p.set_code((b[i]));
             p.set_title(rs.getString(1));
             p.set_price(rs.getFloat(2));
             p.set_coverImage(rs.getString(3));
             _cart.addToCart(p);
+
+            //addToCart(p);
         }
+
+
 
     }
 
@@ -73,7 +75,7 @@ public class CartController {
 
     public void addToCart(Product p){
 
-        /*String cartUser = _cart.get_user().get_username();
+        String cartUser = _cart.get_user().get_username();
 
         try {
             Connection conn = DBConnSingleton.getConn();
@@ -91,7 +93,7 @@ public class CartController {
                 c[i]=b[i];
             }
 
-            c[b.length+1]=p.get_code();
+            c[b.length]=p.get_code();
 
             query = "UPDATE sale SET products = "+conn.createArrayOf(a.getBaseTypeName(),c)+" where sale.username ILIKE ?;";
             stmt = conn.prepareStatement(query);
@@ -103,7 +105,7 @@ public class CartController {
         }catch (SQLException e){
             e.printStackTrace();
         }
-*/
+
     }
 
 
