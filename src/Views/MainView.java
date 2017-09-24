@@ -7,6 +7,7 @@ import Models.Catalog;
 import Models.Product;
 import Models.User;
 import SupportClasses.DBConnSingleton;
+import SupportClasses.LoginManager;
 import SupportClasses.Observer;
 import SupportClasses.Subject;
 
@@ -36,9 +37,12 @@ public class MainView extends Observer{
     private JComboBox comboBox;
     private JTextField searchText;
     private JButton searchButton;
+    private JButton registerButton;
     private Catalog _catalog;
     private CatalogController _catalogController;
     private DefaultTableModel _model;
+    private LoginManager _loginManager;
+    private Cart _cart;
 
     public static void main(String args[])
     {
@@ -54,8 +58,9 @@ public class MainView extends Observer{
     {
         SetupDBConn();
         SetupView();
+        Cart c = new Cart(new User());
         User u = new User();
-        Cart c = new Cart(u);
+        _loginManager = new LoginManager();
         u.set_username("john");
         CartController cc = new CartController(c);
     }
@@ -92,6 +97,8 @@ public class MainView extends Observer{
 
         cartButton.setFocusPainted(false);
 
+        registerButton.setFocusPainted(false);
+        registerButton.setBorder(lineBorder);
         loginButton.setFocusPainted(false);
         loginButton.setBorder(lineBorder);
 
@@ -116,13 +123,26 @@ public class MainView extends Observer{
 
         cartButton.addActionListener(e -> new CartView());
         //TODO gestire evento per login
-        loginButton.addActionListener( e -> JOptionPane.showMessageDialog(null, "ayy lmao") );
+        loginButton.addActionListener( e -> makeLogin() );
+        registerButton.addActionListener( e -> JOptionPane.showMessageDialog(null, "Registrazione da fare"));//TODO registrazione
         searchButton.addActionListener(e -> onSearchButtonClicked());
     }
 
     public static void SetupDBConn()
     {
         DBConnSingleton.getInstance();
+    }
+
+    public void makeLogin()
+    {
+        if(_loginManager.checkUser(usernameText.getText(), passwordText.getText()))
+        {
+            _cart = new Cart(_loginManager.getUser());
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "username o password non validi");
+        }
     }
 
     public void onSearchButtonClicked()
