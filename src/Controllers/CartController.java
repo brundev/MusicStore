@@ -36,11 +36,11 @@ public class CartController {
 
         Connection conn = DBConnSingleton.getConn();
         String query = "select product from Sale where sale.username = ?;";
-        PreparedStatement stmt = conn.prepareStatement(query);
-        stmt.setString(1,cartUser);
+        PreparedStatement stmt =conn.prepareStatement(query);
+        stmt.setString( 1,"john");
         ResultSet rs = stmt.executeQuery(query);
 
-        
+
 
         Product p;
 
