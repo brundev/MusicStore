@@ -13,10 +13,10 @@ import java.util.ArrayList;
  */
 public class Product extends Subject{
 
-    private String _code;
+    private int _code;
     private String _title;
     private ArrayList<String> _trackList;
-    private BufferedImage _coverImage; //per prelevare immagine da un URL
+    private String _coverImage; //per prelevare immagine da un URL
     private float _price;
     private LocalDateTime _firstAddedInStore;
     private String _description;
@@ -32,13 +32,14 @@ public class Product extends Subject{
 
     }
 
-    public Product (String code, String title, ArrayList<String> trackList, BufferedImage coverImage, float price, LocalDateTime firstAddedInStore, String description, Musician artist, String genre, ArrayList<Musician> involvedArtists, ArrayList<String> usedInstruments, int productStocks) {
+    public Product (int code, String title, ArrayList<String> trackList, String coverImage, float price, LocalDateTime firstAddedInStore, String description, Musician artist, String genre, ArrayList<Musician> involvedArtists, ArrayList<String> usedInstruments, int productStocks) {
         _code = code;
         _title = title;
         _trackList = trackList;
         _coverImage = coverImage;
         _price = price;
         _firstAddedInStore = firstAddedInStore;
+        _description=description;
         _artist = artist;
         _genre = genre;
         _involvedArtists = involvedArtists;
@@ -46,7 +47,7 @@ public class Product extends Subject{
         _productStocks = productStocks;
     }
 
-    public void set_code(String _code) {
+    public void set_code(int _code) {
         this._code = _code;
         notifyAllObservers();
     }
@@ -63,7 +64,7 @@ public class Product extends Subject{
         notifyAllObservers();
     }
 
-    public void set_coverImage(BufferedImage _coverImage) {
+    public void set_coverImage(String _coverImage) {
 
         this._coverImage = _coverImage;
         notifyAllObservers();
@@ -117,7 +118,7 @@ public class Product extends Subject{
         notifyAllObservers();
     }
 
-    public String get_code() {
+    public int get_code() {
         return _code;
     }
 
@@ -129,7 +130,7 @@ public class Product extends Subject{
         return _trackList;
     }
 
-    public BufferedImage get_coverImage() {
+    public String get_coverImage() {
         return _coverImage;
     }
 

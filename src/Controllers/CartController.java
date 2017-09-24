@@ -35,44 +35,76 @@ public class CartController {
         String cartUser = _cart.get_user().get_username();
 
         Connection conn = DBConnSingleton.getConn();
-        String query = "select products from sale where sale.username ILIKE 'john';";
+        String query = "select products from sale where sale.username ILIKE ?;";
         PreparedStatement stmt = conn.prepareStatement(query);
-       // stmt.setString( 1,"john");
+        stmt.setString( 1,cartUser);
         ResultSet rs = stmt.executeQuery();
 
+        rs.next();
         Array a = rs.getArray(1);
-        String[] nullable = (String[])a.getArray();
+        Integer b []= (Integer[])a.getArray();
 
-        System.out.println(nullable[0]);
-
-
+        System.out.println(b[1]);
 
         Product p;
 
-
-        while(rs.next())
+        for(int i=0;i<b.length;i++)
         {
+
+            query = "select title,price,coverimage from Products where id = ?;";
+            stmt = conn.prepareStatement(query);
+            stmt.setInt( 1,b[i]);
+            rs = stmt.executeQuery();
+
+            rs.next();
+
             p = new Product();
-            p.set_code(rs.getString(1));
-            p.set_title(rs.getString(2));
-            //p.set_trackList (rs.getArray(3));
-
-            //rowValues.add(rs.getString(3));
-            //p.set_trackList(rowValues);
-
-            p.set_price(rs.getFloat(5));
-            p.set_description(rs.getString(7));
-            p.set_genre(rs.getString(9));
-            //p.set_artist(rs.getString(14));
+            p.set_code((b[i]));
+            p.set_title(rs.getString(1));
+            p.set_price(rs.getFloat(2));
+            p.set_coverImage(rs.getString(3));
             _cart.addToCart(p);
         }
 
     }
 
 
-    //TODO
-    //public void addToCart(Product p)
-    //
+
+    public void addToCart(Product p){
+
+        String cartUser = _cart.get_user().get_username();
+
+        try {
+            Connection conn = DBConnSingleton.getConn();
+            String query = "select products from sale where sale.username ILIKE ?;";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1,cartUser);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+
+            Array a = rs.getArray(1);
+            Integer b []= (Integer[])a.getArray();
+            Integer c[] = new Integer[b.length+1];
+
+            for(int i=0;i<b.length;i++){
+                c[i]=b[i];
+            }
+
+            c[b.length+1]=p.get_code();
+
+            query = "UPDATE sale SET products = ? where sale.username ILIKE ?;";
+            stmt = conn.prepareStatement(query);
+            stmt.setString(1,new String(conn.createArrayOf(a.getBaseTypeName(),c)));
+            stmt.executeUpdate();
+
+
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+    }
+
 
     //TODO
     //public void removeFromCart(Product p)
