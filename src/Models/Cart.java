@@ -20,7 +20,6 @@ public class Cart extends Subject{
     public void addToCart(Product p){
         _cartList.add(p);
         notifyAllObservers();
-
     }
 
     public User get_user() {

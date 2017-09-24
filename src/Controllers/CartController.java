@@ -31,12 +31,12 @@ public class CartController {
 
     //TODO
     public void setCart() throws SQLException{
-        /*
+
         String cartUser = _cart.get_user().get_username();
 
         Connection conn = DBConnSingleton.getConn();
         String query = "select products from sale where sale.username ILIKE 'john';";
-        PreparedStatement stmt =conn.prepareStatement(query);
+        PreparedStatement stmt = conn.prepareStatement(query);
        // stmt.setString( 1,"john");
         ResultSet rs = stmt.executeQuery();
 
@@ -67,7 +67,6 @@ public class CartController {
             _cart.addToCart(p);
         }
 
-*/
     }
 
 
