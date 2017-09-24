@@ -57,7 +57,7 @@ DROP TABLE IF EXISTS Sale CASCADE;
 CREATE TABLE Sale (
     id SERIAL PRIMARY KEY,
 	username VARCHAR(15) REFERENCES Customer(username) ON UPDATE CASCADE ON DELETE SET DEFAULT , 
-	products NUMERIC ARRAY, 
+	products INTEGER ARRAY,
 	price NUMERIC, 
 	saledatetime TIMESTAMP with TIME ZONE , 
 	ip VARCHAR(15), 
@@ -67,9 +67,11 @@ CREATE TABLE Sale (
 
 INSERT INTO Products (id,title,tracklist,coverimage,price,firstadded,description,artist,genre,involvedartists,usedinstruments,productstocks) VALUES(1,
 'animals','{"pigs,dogs,sheeps"}','indirizzolel',24,'2017-09-09','i like music',20,'rock','{"gino"}','{chitarra}',10);
+INSERT INTO Products (id,title,tracklist,coverimage,price,firstadded,description,artist,genre,involvedartists,usedinstruments,productstocks) VALUES(2,
+	'meddle','{"pigs,dogs,sheeps"}','indirizzolel',24,'2015-09-09','i like music',20,'rock','{"jelly"}','{chitarra}',10);
 
 INSERT INTO Musician (id,name,genre,birthdate,instruments) VALUES (20, 'gino','pupu','2017-02-21','{"pupu"}');
 
 INSERT INTO Customer (cf, username, password, name, surname, address, telephone, cellphone)  VALUES ('aaaaaaaaaaaaaaaa','john','a','john','jonhyllo','hello city','1234567','12345456');
 
-INSERT INTO Sale (username, products, price, saledatetime, ip, paymenttype, deliverytype) VALUES ('john','{1}',1,'2016-06-22 22:10:25-04','','','');
+INSERT INTO Sale (username, products, price, saledatetime, ip, paymenttype, deliverytype) VALUES ('john','{1,2}',1,'2016-06-22 22:10:25-04','','','');
