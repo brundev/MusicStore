@@ -1,11 +1,13 @@
 package Models;
 
+import SupportClasses.Subject;
+
 import java.util.ArrayList;
 
 /**
  * Created by riccardo on 16/09/17.
  */
-public class Cart {
+public class Cart extends Subject{
 
     private ArrayList<Product> _cartList;
     private User _user;
@@ -15,8 +17,10 @@ public class Cart {
         return _cartList;
     }
 
-    public void set_cartList(ArrayList<Product> _cartList) {
-        this._cartList = _cartList;
+    public void addToCart(Product p){
+        _cartList.add(p);
+        notifyAllObservers();
+
     }
 
     public User get_user() {

@@ -19,4 +19,6 @@ public class CartView extends JFrame{
         this.setVisible(true);
         this.setSize(400, 400 );
     }
+
+    //
 }
