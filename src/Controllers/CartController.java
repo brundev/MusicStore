@@ -4,10 +4,7 @@ import Models.Cart;
 import Models.Product;
 import SupportClasses.DBConnSingleton;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,11 +35,12 @@ public class CartController {
         String cartUser = _cart.get_user().get_username();
 
         Connection conn = DBConnSingleton.getConn();
-        Statement stmt = conn.createStatement() ;
-        String query = "select product from Sale where sale.username = ;" ;
-        ResultSet rs = stmt.executeQuery(query) ;
+        String query = "select product from Sale where sale.username = ?;";
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setString(1,cartUser);
+        ResultSet rs = stmt.executeQuery(query);
 
-
+        
 
         Product p;
 
