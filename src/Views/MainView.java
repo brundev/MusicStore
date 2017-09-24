@@ -33,6 +33,8 @@ public class MainView extends Observer{
     private JLabel titleLabel;
     private JScrollPane scrollPane;
     private JComboBox comboBox;
+    private JTextField textField1;
+    private JButton ricercaButton;
     private Catalog _catalog;
     DefaultTableModel _model;
 
