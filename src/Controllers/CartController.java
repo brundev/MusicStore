@@ -42,25 +42,25 @@ public class CartController {
 
         rs.next();
 
-        Array a = rs.getArray(1);
-        Integer b []= (Integer[])a.getArray();
+        ArrayList<Integer> a = (ArrayList<Integer>) rs.getObject(1);
 
-        System.out.println(b[1]);
+        /*Array a = rs.getArray(1);
+        Integer b []= (Integer[])a.getArray();*/
 
         Product p;
 
-        for(int i=0;i<b.length;i++)
+        for(int i=0;i<a.size();i++)
         {
 
             query = "select title,price,coverimage from Products where id = ?;";
             stmt = conn.prepareStatement(query);
-            stmt.setInt( 1,b[i]);
+            stmt.setInt( 1,a.get(i));
             rs = stmt.executeQuery();
 
             rs.next();
 
             p = new Product();
-            p.set_code((b[i]));
+            p.set_code((a.get(i)));
             p.set_title(rs.getString(1));
             p.set_price(rs.getFloat(2));
             p.set_coverImage(rs.getString(3));
