@@ -35,9 +35,9 @@ public class CartController {
         String cartUser = _cart.get_user().get_username();
 
         Connection conn = DBConnSingleton.getConn();
-        String query = "select product from Sale where sale.username = ?;";
+        String query = "select product from sale where sale.username ILIKE 'john';";
         PreparedStatement stmt =conn.prepareStatement(query);
-        stmt.setString( 1,"john");
+       // stmt.setString( 1,"john");
         ResultSet rs = stmt.executeQuery(query);
 
 
