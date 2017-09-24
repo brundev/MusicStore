@@ -41,6 +41,7 @@ public class CartController {
         ResultSet rs = stmt.executeQuery();
 
         rs.next();
+
         Array a = rs.getArray(1);
         Integer b []= (Integer[])a.getArray();
 
@@ -92,9 +93,9 @@ public class CartController {
 
             c[b.length+1]=p.get_code();
 
-            query = "UPDATE sale SET products = ? where sale.username ILIKE ?;";
+            query = "UPDATE sale SET products = "+conn.createArrayOf(a.getBaseTypeName(),c)+" where sale.username ILIKE ?;";
             stmt = conn.prepareStatement(query);
-            stmt.setString(1,new String(conn.createArrayOf(a.getBaseTypeName(),c)));
+            stmt.setString(1,cartUser);
             stmt.executeUpdate();
 
 
