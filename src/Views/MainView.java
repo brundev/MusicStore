@@ -16,7 +16,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.awt.*;
-
+import java.sql.SQLException;
 
 
 /**
@@ -33,10 +33,11 @@ public class MainView extends Observer{
     private JLabel titleLabel;
     private JScrollPane scrollPane;
     private JComboBox comboBox;
-    private JTextField textField1;
-    private JButton ricercaButton;
+    private JTextField searchText;
+    private JButton searchButton;
     private Catalog _catalog;
-    DefaultTableModel _model;
+    private CatalogController _catalogController;
+    private DefaultTableModel _model;
 
     public static void main(String args[])
     {
@@ -68,6 +69,14 @@ public class MainView extends Observer{
         cartButton.setSize(30, 100);
         cartButton.setText("");
 
+        comboBox.addItem("");
+        comboBox.addItem("Artista");
+        comboBox.addItem("Genere");
+        comboBox.addItem("Prezzo");
+        comboBox.addItem("Nome CD/DVD");
+
+        searchButton.setFocusPainted(false);
+
         usernameText.setSize(40,300);
         passwordText.setSize(40,300);
 
@@ -84,7 +93,6 @@ public class MainView extends Observer{
         cartButton.setFocusPainted(false);
 
         loginButton.setFocusPainted(false);
-
         loginButton.setBorder(lineBorder);
 
         //catalogTable.addColumn(testColumn);
@@ -93,7 +101,7 @@ public class MainView extends Observer{
         catalogTable = new JTable(_model);
         _catalog = new Catalog();
         _catalog.attach(this);
-        CatalogController _catalogController = new CatalogController(_catalog);
+        _catalogController = new CatalogController(_catalog);
 
         catalogTable.setVisible(true);
         scrollPane.setViewportView(catalogTable);
@@ -101,11 +109,39 @@ public class MainView extends Observer{
         cartButton.addActionListener(e -> new CartView());
         //TODO gestire evento per login
         loginButton.addActionListener( e -> JOptionPane.showMessageDialog(null, "ayy lmao") );
+        searchButton.addActionListener(e -> onSearchButtonClicked());
     }
 
     public static void SetupDBConn()
     {
         DBConnSingleton.getInstance();
+    }
+
+    public void onSearchButtonClicked()
+    {
+        try {
+            switch ((String) comboBox.getSelectedItem()) {
+                case "":
+                    _catalogController.setProductList();
+                    break;
+                case "Artista":
+                    _catalogController.getProductByArtist(searchText.getText());
+                    break;
+                case "Genere":
+                    _catalogController.getProductByGenre(searchText.getText());
+                    break;
+                case "Prezzo":
+                    _catalogController.getProductByPrice(searchText.getText());
+                    break;
+                case "Nome CD/DVD":
+                    _catalogController.getProductByTitle(searchText.getText());
+                    break;
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @Override

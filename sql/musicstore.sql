@@ -66,7 +66,7 @@ CREATE TABLE Sale (
 );
 
 INSERT INTO Products (id,title,tracklist,coverimage,price,firstadded,description,artist,genre,involvedartists,usedinstruments,productstocks) VALUES(1,
-'animals','{"pigs,dogs,sheeps"}','indirizzolel',24,'2017-09-09','i like music',20,'rock','{"gino"}','{chitarra}',10);
+'animals','{"pigs,dogs,sheeps"}','indirizzolel',24,'2017-09-09','i like music',20,'rock','{"pino"}','{chitarra}',10);
 
 INSERT INTO Musician (id,name,genre,birthdate,instruments) VALUES (20, 'gino','pupu','2017-02-21','{"pupu"}');
 

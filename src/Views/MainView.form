@@ -136,7 +136,9 @@
         <children>
           <scrollpane id="e290e" binding="scrollPane">
             <constraints border-constraint="Center"/>
-            <properties/>
+            <properties>
+              <background color="-1"/>
+            </properties>
             <border type="none"/>
             <children>
               <component id="4f8ba" class="javax.swing.JTable" binding="catalogTable">
@@ -152,85 +154,96 @@
           </scrollpane>
         </children>
       </grid>
-      <scrollpane id="e8f6c">
+      <grid id="eeecd" layout-manager="BorderLayout" hgap="0" vgap="0">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="-1" height="50"/>
+            <maximum-size width="-1" height="50"/>
+          </grid>
         </constraints>
         <properties/>
         <border type="none"/>
         <children>
-          <toolbar id="b325e">
-            <constraints/>
+          <toolbar id="480a1">
+            <constraints border-constraint="Center"/>
             <properties>
+              <background color="-1"/>
               <maximumSize width="0" height="50"/>
               <minimumSize width="0" height="50"/>
             </properties>
             <border type="none"/>
             <children>
-              <grid id="f9ff6" layout-manager="BorderLayout" hgap="0" vgap="0">
+              <grid id="13904" layout-manager="BorderLayout" hgap="0" vgap="0">
                 <constraints/>
                 <properties>
+                  <background color="-1"/>
                   <maximumSize width="10" height="2147483647"/>
                   <minimumSize width="10" height="0"/>
                 </properties>
                 <border type="none"/>
                 <children/>
               </grid>
-              <component id="72783" class="javax.swing.JLabel">
+              <component id="7f208" class="javax.swing.JLabel">
                 <constraints/>
                 <properties>
                   <text value="Ricerca per:"/>
                 </properties>
               </component>
-              <grid id="180eb" layout-manager="BorderLayout" hgap="0" vgap="0">
+              <grid id="29648" layout-manager="BorderLayout" hgap="0" vgap="0">
                 <constraints/>
                 <properties>
+                  <background color="-1"/>
                   <maximumSize width="10" height="2147483647"/>
                   <minimumSize width="10" height="0"/>
                 </properties>
                 <border type="none"/>
                 <children/>
               </grid>
-              <component id="57c5d" class="javax.swing.JComboBox" binding="comboBox">
+              <component id="f5020" class="javax.swing.JComboBox" binding="comboBox">
                 <constraints/>
                 <properties>
+                  <background color="-1"/>
                   <maximumSize width="150" height="40"/>
                 </properties>
               </component>
-              <grid id="bc831" layout-manager="BorderLayout" hgap="0" vgap="0">
+              <grid id="ba15e" layout-manager="BorderLayout" hgap="0" vgap="0">
                 <constraints/>
                 <properties>
+                  <background color="-1"/>
                   <maximumSize width="10" height="2147483647"/>
                   <minimumSize width="10" height="0"/>
                 </properties>
                 <border type="none"/>
                 <children/>
               </grid>
-              <component id="40684" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+              <component id="9205e" class="javax.swing.JTextField" binding="searchText">
                 <constraints/>
                 <properties>
+                  <background color="-1"/>
                   <maximumSize width="150" height="40"/>
                 </properties>
               </component>
-              <grid id="94846" layout-manager="BorderLayout" hgap="0" vgap="0">
+              <grid id="e5df3" layout-manager="BorderLayout" hgap="0" vgap="0">
                 <constraints/>
                 <properties>
+                  <background color="-1"/>
                   <maximumSize width="10" height="2147483647"/>
                   <minimumSize width="10" height="0"/>
                 </properties>
                 <border type="none"/>
                 <children/>
               </grid>
-              <component id="b71c4" class="javax.swing.JButton" binding="ricercaButton" default-binding="true">
+              <component id="8b5e0" class="javax.swing.JButton" binding="searchButton">
                 <constraints/>
                 <properties>
+                  <background color="-1"/>
                   <text value="Ricerca"/>
                 </properties>
               </component>
             </children>
           </toolbar>
         </children>
-      </scrollpane>
+      </grid>
     </children>
   </grid>
 </form>

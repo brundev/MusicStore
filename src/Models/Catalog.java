@@ -28,6 +28,7 @@ public class Catalog extends Subject{
     public void clear()
     {
         _catalogList.clear();
+        notifyAllObservers();
     }
 
     public ArrayList<Product> getCatalogProducts()
