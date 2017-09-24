@@ -35,17 +35,19 @@ public class CartController {
         String cartUser = _cart.get_user().get_username();
 
         Connection conn = DBConnSingleton.getConn();
-        String query = "select product from sale where sale.username ILIKE 'john';";
+        String query = "select products from sale where sale.username ILIKE 'john';";
         PreparedStatement stmt =conn.prepareStatement(query);
        // stmt.setString( 1,"john");
-        ResultSet rs = stmt.executeQuery(query);
+        ResultSet rs = stmt.executeQuery();
+
+        Array a = rs.getArray(1);
+        String[] nullable = (String[])a.getArray();
+
+        System.out.println(nullable[0]);
 
 
 
         Product p;
-
-        ArrayList<String> rowValues = new ArrayList();
-
 
 
         while(rs.next())
@@ -55,8 +57,8 @@ public class CartController {
             p.set_title(rs.getString(2));
             //p.set_trackList (rs.getArray(3));
 
-            rowValues.add(rs.getString(3));
-            p.set_trackList(rowValues);
+            //rowValues.add(rs.getString(3));
+            //p.set_trackList(rowValues);
 
             p.set_price(rs.getFloat(5));
             p.set_description(rs.getString(7));
