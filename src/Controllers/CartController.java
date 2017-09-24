@@ -48,7 +48,6 @@ public class CartController {
 
         Product p;
 
-
         for(int i=0;i<b.length;i++)
         {
 
@@ -56,6 +55,8 @@ public class CartController {
             stmt = conn.prepareStatement(query);
             stmt.setInt( 1,b[i]);
             rs = stmt.executeQuery();
+
+            rs.next();
 
             p = new Product();
             p.set_code(Integer.toString(b[i]));
@@ -69,7 +70,7 @@ public class CartController {
 
 
 
-    public void addToCart(Product p){
+   /* public void addToCart(Product p){
 
 
         try {
@@ -83,7 +84,7 @@ public class CartController {
             e.printStackTrace();
         }
 
-    }
+    }*/
 
 
     //TODO
