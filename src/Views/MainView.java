@@ -93,12 +93,18 @@ public class MainView extends Observer{
         registerButton.setBorder(lineBorder);
         loginButton.setFocusPainted(false);
         loginButton.setBorder(lineBorder);
-
-        //catalogTable.addColumn(testColumn);
-        //String[] columnNames = {"Titolo", "Immagine", "Prezzo", "Descrizione", "Autore", "Genere"};
-        //_model = _factory.getTableModel("MainView");
         _model = _factory.getTableModel("MainView");
-        catalogTable = new JTable(_model);
+        catalogTable = new JTable(_model)
+        {
+            //  Returning the Class of each column will allow different
+            //  renderers to be used based on Class
+            public Class getColumnClass(int column)
+            {
+                return getValueAt(0, column).getClass();
+            }
+        };
+
+        catalogTable.setRowHeight(60);
         _catalog = new Catalog();
         _catalog.attach(this);
         _catalogController = new CatalogController(_catalog);
@@ -216,9 +222,14 @@ public class MainView extends Observer{
         _model.setRowCount(0);
         Object row[];
         _catalog = (Catalog)obj;
+        ImageIcon imageIcon;
+        Image image;
         for (Product p : _catalog.getCatalogProducts())
         {
-            row = new Object[]{p.get_title(), p.get_coverImage(), p.get_price() + " €", p.get_description(), p.get_artist().get_name(), p.get_genre()};
+            imageIcon = new ImageIcon(getClass().getResource(p.get_coverImage()));
+            image = imageIcon.getImage();
+            imageIcon = new ImageIcon(image.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+            row = new Object[]{imageIcon,p.get_title(), p.get_price() + " €", p.get_description(), p.get_artist().get_name(), p.get_genre()};
             _model.addRow(row);
         }
     }
