@@ -7,6 +7,7 @@ import SupportClasses.DBConnSingleton;
 
 import java.math.BigDecimal;
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.Date;
@@ -56,7 +57,6 @@ public class CatalogController
             p.set_firstAddedInStore(rs.getTimestamp(6).toLocalDateTime());
             p.set_description(rs.getString(7));
 
-            //TODO artist
             p.set_genre(rs.getString(9));
 
             Array c = rs.getArray(10);
@@ -68,6 +68,15 @@ public class CatalogController
             p.set_usedInstruments(f);
 
             p.set_productStocks(rs.getInt(12));
+            
+            String name = rs.getString(14);
+            String genre = rs.getString(15);
+            LocalDate birthDate = rs.getTimestamp(16).toLocalDateTime().toLocalDate();
+            Array g = rs.getArray(17);
+            ArrayList<String> instruments = new ArrayList(Arrays.asList(g));
+            Musician m = new Musician(name, genre, birthDate, instruments);
+            p.set_artist(m);
+
             _catalog.add(p);
         }
 
