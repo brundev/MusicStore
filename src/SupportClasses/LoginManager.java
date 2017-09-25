@@ -1,7 +1,5 @@
 package SupportClasses;
 
-import Models.Customer;
-import Models.Product;
 import Models.User;
 
 import java.sql.PreparedStatement;
@@ -10,7 +8,7 @@ import java.sql.SQLException;
 
 public class LoginManager {
 
-    private Customer _user;
+    private User _user;
 
     public boolean checkUser(String username, String password)
     {
@@ -18,7 +16,7 @@ public class LoginManager {
 
         try
         {
-            String q = "select * from customer as c where c.username ilike ? and c.password ilike ?;";
+            String q = "select * from utente as u where u.username ilike ? and u.password ilike ?;";
             PreparedStatement pst = DBConnSingleton.getConn().prepareStatement(q);
             pst.setString(1, username);
             pst.setString(2, password);
@@ -26,7 +24,7 @@ public class LoginManager {
 
             if(rs.next())
             {
-                _user = new Customer();
+                _user = new User();
                 _user.set_CF(rs.getString(1));
                 _user.set_username(rs.getString(2));
                 _user.set_password(rs.getString(3));
@@ -35,6 +33,7 @@ public class LoginManager {
                 _user.set_address(rs.getString(6));
                 _user.set_telephone(rs.getString(7));
                 _user.set_cellphone(rs.getString(8));
+                _user.set_isEmployee(rs.getBoolean(9));
 
                 flag = true;
             }
@@ -47,7 +46,7 @@ public class LoginManager {
         return flag;
     }
 
-    public Customer getUser()
+    public User getUser()
     {
         return _user;
     }
