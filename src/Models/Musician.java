@@ -13,6 +13,13 @@ public class Musician {
     private LocalDate _birthDate;
     private ArrayList<String> _instruments;
 
+    public Musician(String _name, String _mainGenre, LocalDate _birthDate, ArrayList<String> _instruments) {
+        this._name = _name;
+        this._mainGenre = _mainGenre;
+        this._birthDate = _birthDate;
+        this._instruments = _instruments;
+    }
+
     public String get_name() {
         return _name;
     }
