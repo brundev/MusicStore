@@ -160,6 +160,10 @@ public class MainView extends Observer{
                 new CartView();
             }
         }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "E' necessario essere loggati per accedere al carrello");
+        }
     }
 
     public void makeLogin()
