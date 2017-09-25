@@ -7,8 +7,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ProductTableModel extends DefaultTableModel{
 
-    private String[] _columnNames = {"Titolo", "Immagine", "Prezzo", "Descrizione", "Autore", "Genere"};
-
     public ProductTableModel()
     {
         super(null, new String[]{"Titolo", "Immagine", "Prezzo", "Descrizione", "Autore", "Genere"});
