@@ -1,10 +1,9 @@
 package Models;
 
 /**
- * Created by riccardo on 14/09/17.
+ * Created by riccardo on 16/09/17.
  */
 public class User {
-
     private String _CF;
     private String _username;
     private String _password;
@@ -13,6 +12,7 @@ public class User {
     private String _address;
     private String _telephone;
     private String _cellphone;
+    private boolean _isEmployee;
 
     public String get_CF() {
         return _CF;
@@ -76,5 +76,13 @@ public class User {
 
     public void set_cellphone(String _cellphone) {
         this._cellphone = _cellphone;
+    }
+
+    public boolean get_isEmployee() {
+        return _isEmployee;
+    }
+
+    public void set_isEmployee(boolean _isEmployee) {
+        this._isEmployee = _isEmployee;
     }
 }

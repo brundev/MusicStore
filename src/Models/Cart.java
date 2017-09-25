@@ -10,10 +10,10 @@ import java.util.ArrayList;
 public class Cart extends Subject{
 
     private ArrayList<Product> _cartList;
-    private Customer _user;
+    private User _user;
     private float _totalPrice;
 
-    public Cart(Customer user)
+    public Cart(User user)
     {
         _totalPrice = 0;
         _user = user;
@@ -36,7 +36,7 @@ public class Cart extends Subject{
         _cartList.remove(position);
     }
 
-    public Customer get_user() {
+    public User get_user() {
         return _user;
     }
 

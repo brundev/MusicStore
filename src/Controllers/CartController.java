@@ -64,9 +64,6 @@ public class CartController {
             p.set_coverImage(rs.getString(3));
             _cart.addToCart(p);
         }
-
-
-
     }
 
 

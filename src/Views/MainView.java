@@ -9,10 +9,8 @@ import SupportClasses.Observer;
 import SupportClasses.Subject;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.sql.SQLException;
@@ -41,6 +39,7 @@ public class MainView extends Observer{
     private LoginManager _loginManager;
     private Cart _cart;
     private CartController _cartController;
+    private User _user;
 
     public static void main(String args[])
     {
@@ -130,7 +129,8 @@ public class MainView extends Observer{
         });
 
 
-        cartButton.addActionListener(e -> new CartView());
+        cartButton.addActionListener(e -> onCartButtonClicked());
+
         //TODO gestire evento per login
         loginButton.addActionListener( e -> makeLogin() );
         registerButton.addActionListener( e -> JOptionPane.showMessageDialog(null, "Registrazione da fare"));//TODO registrazione
@@ -142,14 +142,41 @@ public class MainView extends Observer{
         DBConnSingleton.getInstance();
     }
 
+    public void onCartButtonClicked()
+    {
+        if(_user!=null)
+        {
+            if(_user.get_isEmployee())
+            {
+                //TODO vista della schermata gestione employee
+            }
+            else
+            {
+                new CartView();
+            }
+        }
+    }
+
     public void makeLogin()
     {
         if(_loginManager.checkUser(usernameText.getText(), passwordText.getText()))
         {
-            Customer c = _loginManager.getUser();
-            _cart = new Cart(c);
-            _cartController = new CartController(_cart);
-            JOptionPane.showMessageDialog(null, "loggato");
+            _user = _loginManager.getUser();
+
+            if(!_user.get_isEmployee()) {
+                _cart = new Cart(_user);
+                _cartController = new CartController(_cart);
+                JOptionPane.showMessageDialog(null, "Loggato come Cliente");
+            }
+            else
+            {
+                ImageIcon imageIcon = new ImageIcon(getClass().getResource("resources/gear.png"));
+                Image image = imageIcon.getImage();
+                imageIcon = new ImageIcon(image.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+                cartButton.setIcon(imageIcon);
+                JOptionPane.showMessageDialog(null, "Loggato come Impiegato");
+            }
+
         }
         else
         {
