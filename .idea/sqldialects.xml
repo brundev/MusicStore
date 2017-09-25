@@ -3,5 +3,6 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/sql/musicstore.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/src/Controllers/CatalogController.java" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/src/SupportClasses/RegistrationManager.java" dialect="PostgreSQL" />
   </component>
 </project>
