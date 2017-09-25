@@ -9,14 +9,14 @@ import javax.swing.table.TableModel;
  */
 public class CatalogTableModel extends DefaultTableModel {
 
+    public CatalogTableModel()
+    {
+        super(null, new String[]{"Titolo", "Immagine", "Prezzo", "Descrizione", "Autore", "Genere"});
+    }
 
-    private String[] _columnNames = {"Titolo", "Immagine", "Prezzo", "Descrizione", "Autore", "Genere"};
-
-    public CatalogTableModel() {
-        DefaultTableModel a = new DefaultTableModel(null, _columnNames) {
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }};
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        return false;
     }
 
 }

@@ -9,11 +9,14 @@ public class CartTableModel extends DefaultTableModel{
 
     private String[] _columnNames = {"Titolo", "Immagine", "Prezzo", "Descrizione", "Autore", "Genere"};
 
-    public CartTableModel() {
-        DefaultTableModel a = new DefaultTableModel(null, _columnNames) {
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }};
+    public CartTableModel()
+    {
+        super(null, new String[]{"Titolo", "Immagine", "Prezzo", "Descrizione", "Autore", "Genere"});
+    }
+
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        return false;
     }
 
 

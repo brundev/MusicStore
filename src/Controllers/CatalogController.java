@@ -74,7 +74,6 @@ public class CatalogController
             LocalDate birthDate = rs.getTimestamp(16).toLocalDateTime().toLocalDate();
             Array g = rs.getArray(17);
             ArrayList<String> instruments = new ArrayList(Arrays.asList(g));
-            p.set_artistName(name);
             Musician m = new Musician(name, genre, birthDate, instruments);
             p.set_artist(m);
 

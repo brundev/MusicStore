@@ -21,7 +21,6 @@ public class Product extends Subject{
     private LocalDateTime _firstAddedInStore;
     private String _description;
     private Musician _artist;
-    private String _artistName;
     private String _genre;
     private ArrayList<Musician> _involvedArtists;
     private ArrayList<String> _usedInstruments;
@@ -164,13 +163,5 @@ public class Product extends Subject{
 
     public int get_productStocks() {
         return _productStocks;
-    }
-
-    public String get_artistName() {
-        return _artistName;
-    }
-
-    public void set_artistName(String _artistName) {
-        this._artistName = _artistName;
     }
 }

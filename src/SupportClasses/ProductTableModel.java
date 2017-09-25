@@ -9,11 +9,14 @@ public class ProductTableModel extends DefaultTableModel{
 
     private String[] _columnNames = {"Titolo", "Immagine", "Prezzo", "Descrizione", "Autore", "Genere"};
 
-    public ProductTableModel() {
-        DefaultTableModel a = new DefaultTableModel(null, _columnNames) {
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }};
+    public ProductTableModel()
+    {
+        super(null, new String[]{"Titolo", "Immagine", "Prezzo", "Descrizione", "Autore", "Genere"});
     }
 
+    @Override
+    public boolean isCellEditable(int row, int column)
+    {
+        return false;
+    }
 }

@@ -3,10 +3,7 @@ package Views;
 import Controllers.CartController;
 import Controllers.CatalogController;
 import Models.*;
-import SupportClasses.DBConnSingleton;
-import SupportClasses.LoginManager;
-import SupportClasses.Observer;
-import SupportClasses.Subject;
+import SupportClasses.*;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -40,6 +37,7 @@ public class MainView extends Observer{
     private Cart _cart;
     private CartController _cartController;
     private User _user;
+    private TableFactory _factory;
 
     public static void main(String args[])
     {
@@ -60,6 +58,7 @@ public class MainView extends Observer{
 
     public void SetupView()
     {
+        _factory = new TableFactory();
         ImageIcon imageIcon = new ImageIcon(getClass().getResource("resources/cart.png"));
         Image image = imageIcon.getImage();
         imageIcon = new ImageIcon(image.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
@@ -96,20 +95,13 @@ public class MainView extends Observer{
         loginButton.setBorder(lineBorder);
 
         //catalogTable.addColumn(testColumn);
-        String[] columnNames = {"Titolo", "Immagine", "Prezzo", "Descrizione", "Autore", "Genere"};
-        _model = new DefaultTableModel(null, columnNames)
-        {
-            @Override
-            public boolean isCellEditable(int row, int column)
-            {
-                return false;
-            }
-        };
+        //String[] columnNames = {"Titolo", "Immagine", "Prezzo", "Descrizione", "Autore", "Genere"};
+        //_model = _factory.getTableModel("MainView");
+        _model = _factory.getTableModel("MainView");
         catalogTable = new JTable(_model);
         _catalog = new Catalog();
         _catalog.attach(this);
         _catalogController = new CatalogController(_catalog);
-
         catalogTable.setVisible(true);
         scrollPane.setViewportView(catalogTable);
 
@@ -226,7 +218,7 @@ public class MainView extends Observer{
         _catalog = (Catalog)obj;
         for (Product p : _catalog.getCatalogProducts())
         {
-            row = new Object[]{p.get_title(), p.get_coverImage(), p.get_price() + " €", p.get_description(), p.get_artistName(), p.get_genre()};
+            row = new Object[]{p.get_title(), p.get_coverImage(), p.get_price() + " €", p.get_description(), p.get_artist().get_name(), p.get_genre()};
             _model.addRow(row);
         }
     }
