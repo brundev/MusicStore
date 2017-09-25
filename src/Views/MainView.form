@@ -18,6 +18,7 @@
         </constraints>
         <properties>
           <background color="-1907998"/>
+          <floatable value="false"/>
         </properties>
         <border type="none"/>
         <children>
@@ -187,6 +188,7 @@
             <constraints border-constraint="Center"/>
             <properties>
               <background color="-1"/>
+              <floatable value="false"/>
               <maximumSize width="0" height="50"/>
               <minimumSize width="0" height="50"/>
             </properties>
