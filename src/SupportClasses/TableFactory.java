@@ -2,6 +2,7 @@ package SupportClasses;
 
 import Models.Product;
 
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 /**
@@ -9,21 +10,22 @@ import javax.swing.table.TableModel;
  */
 public class TableFactory {
 
-    public TableModel getTableModel(String table){
+    public DefaultTableModel getTableModel(String table){
 
-        if (table.equals("mainView")){
-            return new CatalogTableModel();
-        }
+        DefaultTableModel model;
 
-        if (table.equals("CartView"))
+        switch(table)
         {
-            return new CartTableModel();
+            case "MainView" : model = new CatalogTableModel();
+                break;
+            case "CartView" : model = new CartTableModel();
+                break;
+            case "ProductView" : model = new ProductTableModel();
+                break;
+            default : model = new DefaultTableModel();
+                break;
         }
 
-        if (table.equals("ProductView")){
-            return new ProductTableModel();
-        }
-
-        return null;
+        return model;
     }
 }

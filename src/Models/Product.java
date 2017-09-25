@@ -164,5 +164,4 @@ public class Product extends Subject{
     public int get_productStocks() {
         return _productStocks;
     }
-
 }
