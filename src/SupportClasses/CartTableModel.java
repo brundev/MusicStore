@@ -7,8 +7,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CartTableModel extends DefaultTableModel{
 
-    private String[] _columnNames = {"Titolo", "Immagine", "Prezzo", "Descrizione", "Autore", "Genere"};
-
     public CartTableModel()
     {
         super(null, new String[]{"Titolo", "Immagine", "Prezzo", "Descrizione", "Autore", "Genere"});
