@@ -10,6 +10,7 @@ import java.util.Observer;
 public class CartView extends JFrame{
 
     private JPanel cartPanel;
+    private JTable table1;
 
     public CartView()
     {

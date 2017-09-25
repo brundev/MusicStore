@@ -97,7 +97,14 @@ public class MainView extends Observer{
 
         //catalogTable.addColumn(testColumn);
         String[] columnNames = {"Titolo", "Immagine", "Prezzo", "Descrizione", "Autore", "Genere"};
-        _model = new DefaultTableModel(null, columnNames);
+        _model = new DefaultTableModel(null, columnNames)
+        {
+            @Override
+            public boolean isCellEditable(int row, int column)
+            {
+                return false;
+            }
+        };
         catalogTable = new JTable(_model);
         _catalog = new Catalog();
         _catalog.attach(this);
@@ -219,7 +226,7 @@ public class MainView extends Observer{
         _catalog = (Catalog)obj;
         for (Product p : _catalog.getCatalogProducts())
         {
-            row = new Object[]{p.get_title(), p.get_coverImage(), p.get_price() + " €", p.get_description(), p.get_artist(), p.get_genre()};
+            row = new Object[]{p.get_title(), p.get_coverImage(), p.get_price() + " €", p.get_description(), p.get_artistName(), p.get_genre()};
             _model.addRow(row);
         }
     }
