@@ -47,7 +47,7 @@ public class CatalogController
         {
             p = new Product();
             p.set_title(rs.getString(2));
-
+            
             Array a = rs.getArray(3);
             ArrayList<String> b = new ArrayList(Arrays.asList(a));
             p.set_trackList(b);
@@ -68,7 +68,7 @@ public class CatalogController
             p.set_usedInstruments(f);
 
             p.set_productStocks(rs.getInt(12));
-            
+
             String name = rs.getString(14);
             String genre = rs.getString(15);
             LocalDate birthDate = rs.getTimestamp(16).toLocalDateTime().toLocalDate();
