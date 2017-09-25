@@ -1,11 +1,15 @@
 package Controllers;
 
 import Models.Catalog;
+import Models.Musician;
 import Models.Product;
 import SupportClasses.DBConnSingleton;
 
 import java.math.BigDecimal;
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.Date;
 
 public class CatalogController
 {
@@ -42,13 +46,31 @@ public class CatalogController
         {
             p = new Product();
             p.set_title(rs.getString(2));
-            //TODO gestire immagine di copertina
+
+            Array a = rs.getArray(3);
+            ArrayList<String> b = new ArrayList(Arrays.asList(a));
+            p.set_trackList(b);
+
+            p.set_coverImage(rs.getString(4));
             p.set_price(rs.getFloat(5));
+            p.set_firstAddedInStore(rs.getTimestamp(6).toLocalDateTime());
             p.set_description(rs.getString(7));
+
+            //TODO artist
             p.set_genre(rs.getString(9));
-            //p.set_artist(rs.getString(14));
+
+            Array c = rs.getArray(10);
+            ArrayList<Musician> d = new ArrayList(Arrays.asList(c));
+            p.set_involvedArtists(d);
+
+            Array e = rs.getArray(11);
+            ArrayList<String> f = new ArrayList(Arrays.asList(e));
+            p.set_usedInstruments(f);
+
+            p.set_productStocks(rs.getInt(12));
             _catalog.add(p);
         }
+
     }
 
     public void getProductByGenre(String genre) throws SQLException
@@ -71,7 +93,7 @@ public class CatalogController
     {
             String q = "select * from products as p join musician as m on p.artist = m.id where p.title ilike ?;";
             PreparedStatement pst = DBConnSingleton.getConn().prepareStatement(q);
-            pst.setString(1, title + "%");
+            pst.setString(1, "%" + title + "%");
             setProductList(pst);
 
     }
@@ -80,7 +102,7 @@ public class CatalogController
     {
             String q = "select * from products as p join musician as m on p.artist = m.id where m.name ilike ? or array_to_string(involvedartists, ?) ilike ?";
             PreparedStatement pst = DBConnSingleton.getConn().prepareStatement(q);
-            pst.setString(1,name + "%");
+            pst.setString(1,"%" + name + "%");
             pst.setString(2,",");
             pst.setString(3,"%" + name + "%");
             setProductList(pst);
