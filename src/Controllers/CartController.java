@@ -98,6 +98,7 @@ public class CartController {
             stmt.setString(1,cartUser);
             stmt.executeUpdate();
 
+            _cart.addToCart(p);
 
 
         }catch (SQLException e){
@@ -125,6 +126,7 @@ public class CartController {
             Integer c[] = new Integer[b.length-1];
 
             int ct=0;
+            int position= 0;
             boolean removed=false;
 
             for(int i=0;i<b.length;i++){
@@ -135,6 +137,7 @@ public class CartController {
                 else
                 {
                     removed=true;
+                    position=i;
                 }
             }
 
@@ -143,7 +146,7 @@ public class CartController {
             stmt.setString(1,cartUser);
             stmt.executeUpdate();
 
-
+            _cart.removeFromCart(position);
 
         }catch (SQLException e){
             e.printStackTrace();

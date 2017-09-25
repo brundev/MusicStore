@@ -115,6 +115,21 @@ public class MainView extends Observer{
             }
         });
 
+        usernameText.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                usernameText.setText("");
+            }
+        });
+
+        passwordText.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                passwordText.setText("");
+            }
+        });
+
+
         cartButton.addActionListener(e -> new CartView());
         //TODO gestire evento per login
         loginButton.addActionListener( e -> makeLogin() );
