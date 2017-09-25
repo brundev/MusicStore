@@ -15,14 +15,15 @@ public class Catalog extends Subject{
 
     public void add(ArrayList<Product> list)
     {
-
+        _catalogList.addAll(list);
+        notifyAllObservers();
     }
 
 
     public void remove(Product p)
     {
         _catalogList.remove(p);
-        //notifyAllObservers();
+        notifyAllObservers();
     }
 
     public void clear()
