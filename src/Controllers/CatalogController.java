@@ -46,6 +46,7 @@ public class CatalogController
         while(rs.next())
         {
             p = new Product();
+            p.set_code(rs.getInt(1));
             p.set_title(rs.getString(2));
             
             Array a = rs.getArray(3);

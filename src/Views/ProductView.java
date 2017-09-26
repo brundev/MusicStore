@@ -4,6 +4,7 @@ import Controllers.CartController;
 import Controllers.CatalogController;
 import Models.Catalog;
 import Models.Product;
+import Models.User;
 import SupportClasses.TableFactory;
 
 import javax.swing.*;
@@ -32,7 +33,7 @@ public class ProductView extends JFrame{
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.pack();
         this.setVisible(true);
-        this.setSize(600, 600 );
+        this.setSize(830, 500 );
         SetupView(this);
     }
 
@@ -50,6 +51,14 @@ public class ProductView extends JFrame{
 
         annullaButton.addActionListener(e -> frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING)));
 
-        addToCartButton.addActionListener( e -> _controller.addToCart(_product));
+        addToCartButton.addActionListener( e -> addProductToCart());
+    }
+
+    public void addProductToCart()
+    {
+        if(_controller != null)
+            _controller.addToCart(_product);
+        else
+            JOptionPane.showMessageDialog(null, "E' necessario essere loggati per procedere");
     }
 }
