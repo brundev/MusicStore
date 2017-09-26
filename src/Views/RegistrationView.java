@@ -39,31 +39,24 @@ public class RegistrationView extends JFrame{
 
     public void setupView(JFrame f){
 
-        annullaButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING));
-            }
-        });
+        annullaButton.addActionListener(e -> f.dispatchEvent(new WindowEvent(f, WindowEvent.WINDOW_CLOSING)));
 
 
-        accettaButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        accettaButton.addActionListener(e ->
+        {
 
-                User u;
-                u = new User(cf.getText(),username.getText(),password.getText(),nome.getText(),cognome.getText(),indirizzo.getText(),telefono.getText(),cellulare.getText(),false);
-                int res=RegistrationManager.registerUser(u);
+            User u;
+            u = new User(cf.getText(),username.getText(),password.getText(),nome.getText(),cognome.getText(),indirizzo.getText(),telefono.getText(),cellulare.getText(),false);
+            int res=RegistrationManager.registerUser(u);
 
-                if(res==-1)
-                    JOptionPane.showMessageDialog(null,"Nome utente non disponibile");
-                else
-                    if(res==0)
-                        JOptionPane.showMessageDialog(null,"errore durante la registrazione,riprova più tardi");
-                else
-                        JOptionPane.showMessageDialog(null,"registrazione avvenuta con successo");
+            if(res == -1)
+                JOptionPane.showMessageDialog(null,"Nome utente non disponibile");
+            else
+                if(res == 0)
+                    JOptionPane.showMessageDialog(null,"errore durante la registrazione,riprova più tardi");
+            else
+                    JOptionPane.showMessageDialog(null,"registrazione avvenuta con successo");
 
-            }
         });
 
     }
