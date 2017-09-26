@@ -181,8 +181,10 @@ public class MainView extends Observer{
                     cartButton.setIcon(cartIcon);
 
                 }
-                else
+                else {
                     new RegistrationView();
+                    System.out.print("aaaaaaaaaaaaa");
+                }
 
             }
         });
