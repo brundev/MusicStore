@@ -11,6 +11,7 @@ import SupportClasses.TableFactory;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.sql.SQLException;
 
 public class CartView extends Observer {
 
@@ -31,10 +32,10 @@ public class CartView extends Observer {
         this.pack();
         this.setVisible(true);
         this.setSize(400, 400 );
-        setupView(c);
+        setupView();
     }
 
-    public void setupView(Cart c)
+    public void setupView()
     {
         _cart.attach(this);
 
@@ -50,12 +51,17 @@ public class CartView extends Observer {
         };
 
         _table1.setRowHeight(60);
-        _cart = c;
-       // _cart.attach(this);
         _cartController = new CartController(_cart);
         _table1.setVisible(true);
         _scrollPane.setViewportView(_table1);
-
+        try
+        {
+            _cartController.setCart();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     private void createUIComponents() {
@@ -72,11 +78,14 @@ public class CartView extends Observer {
         Image image;
         for (Product p : _cart.get_cartList())
         {
-            imageIcon = new ImageIcon(getClass().getResource(p.get_coverImage()));
-            image = imageIcon.getImage();
-            imageIcon = new ImageIcon(image.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-            row = new Object[]{imageIcon,p.get_title(), p.get_price() + " €", p.get_artist().get_name(), p.get_genre()};
-            _model.addRow(row);
+            if(!(p.get_code() == 0))
+            {
+                imageIcon = new ImageIcon(getClass().getResource(p.get_coverImage()));
+                image = imageIcon.getImage();
+                imageIcon = new ImageIcon(image.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+                row = new Object[]{imageIcon, p.get_title(), p.get_price() + " €", p.get_artist().get_name(), p.get_genre()};
+                _model.addRow(row);
+            }
         }
     }
 
