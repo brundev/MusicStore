@@ -1,5 +1,6 @@
 package Views;
 
+import Controllers.CartController;
 import Controllers.CatalogController;
 import Models.Catalog;
 import Models.Product;
@@ -8,55 +9,47 @@ import SupportClasses.TableFactory;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.WindowEvent;
 
 public class ProductView extends JFrame{
     private JPanel productPanel;
-    private JTable productTable;
-    private JScrollPane scrollPane;
+    private JLabel imageLabel;
+    private JLabel title;
+    private JButton addToCartButton;
+    private JButton annullaButton;
+    private JLabel price;
+    private JLabel description;
+    private JLabel artist;
+    private JLabel genre;
     private Product _product;
-    private DefaultTableModel _model;
-    private TableFactory _factory;
+    private CartController _controller;
 
-    public ProductView(Product product)
+    public ProductView(Product product, CartController controller)
     {
         _product = product;
+        _controller = controller;
         this.setContentPane(this.productPanel);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.pack();
         this.setVisible(true);
-        this.setSize(400, 400 );
-        SetupView();
+        this.setSize(600, 600 );
+        SetupView(this);
     }
 
-    public void SetupView()
+    public void SetupView(JFrame frame)
     {
         ImageIcon imageIcon = new ImageIcon(getClass().getResource(_product.get_coverImage()));
         Image image = imageIcon.getImage();
-        imageIcon = new ImageIcon(image.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-        _model = new DefaultTableModel(null, new String[]{"",""});
-        //_model = _factory.getTableModel("ProductView");
-        productTable = new JTable(_model)
-        {
-            //  Returning the Class of each column will allow different
-            //  renderers to be used based on Class
-            public Class getColumnClass(int column)
-            {
-                return getValueAt(0, column).getClass();
-            }
-        };
-        productTable.setVisible(true);
-        //Object[] o = {imageIcon};
-        //_model.addRow(o);
-        Object[] o = new Object[]{"Titolo", _product.get_title()};
-        _model.addRow(o);
-        o = new Object[]{"Descrizione", _product.get_description()};
-        _model.addRow(o);
-        o = new Object[]{"Data Inserimento", _product.get_firstAddedInStore()};
-        _model.addRow(o);
-        o = new Object[]{"Prezzo", _product.get_price()};
-        _model.addRow(o);
-        productTable.setRowHeight(60);
-        productTable.setVisible(true);
-        scrollPane.setViewportView(productTable);
+        imageIcon = new ImageIcon(image.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
+        imageLabel.setIcon(imageIcon);
+        title.setText(_product.get_title());
+        price.setText(_product.get_price() + " €");
+        description.setText(_product.get_description());
+        artist.setText(_product.get_artist().get_name());
+        genre.setText(_product.get_genre());
+
+        annullaButton.addActionListener(e -> frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING)));
+
+        addToCartButton.addActionListener( e -> _controller.addToCart(_product));
     }
 }

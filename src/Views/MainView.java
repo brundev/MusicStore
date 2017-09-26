@@ -41,20 +41,19 @@ public class MainView extends Observer{
     private User _user;
     private TableFactory _factory;
 
-    public static void main(String args[])
-    {
-        JFrame frame = new JFrame("Music Store App");
-        frame.setContentPane(new MainView().mainPanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setSize(900,900);
-        frame.setVisible(true);
-    }
-
     public MainView()
     {
+        this.setContentPane(this.mainPanel);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.pack();
+        this.setVisible(true);
+        this.setSize(900, 600 );
         SetupDBConn();
         SetupView();
+    }
+
+    public JPanel getMainPanel() {
+        return mainPanel;
     }
 
     public void SetupView()
@@ -123,7 +122,7 @@ public class MainView extends Observer{
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 int row = catalogTable.rowAtPoint(evt.getPoint());
-                new ProductView(_catalog.getCatalogProducts().get(row));
+                new ProductView(_catalog.getCatalogProducts().get(row), _cartController);
             }
         });
 
@@ -221,7 +220,7 @@ public class MainView extends Observer{
         _user=null;
         loginButton.setEnabled(true);
         loginButton.setVisible(true);
-        registerButton.setText("registrati");
+        registerButton.setText("REGISTRATI");
         usernameText.setEnabled(true);
         usernameText.setVisible(true);
         passwordText.setEnabled(true);
@@ -297,7 +296,7 @@ public class MainView extends Observer{
             imageIcon = new ImageIcon(getClass().getResource(p.get_coverImage()));
             image = imageIcon.getImage();
             imageIcon = new ImageIcon(image.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-            row = new Object[]{imageIcon,p.get_title(), p.get_price() + " €", p.get_description(), p.get_artist().get_name(), p.get_genre()};
+            row = new Object[]{imageIcon,p.get_title(), p.get_price() + " €", p.get_artist().get_name(), p.get_genre()};
             _model.addRow(row);
         }
     }

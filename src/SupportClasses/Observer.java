@@ -1,6 +1,8 @@
 package SupportClasses;
 
-public abstract class Observer
+import javax.swing.*;
+
+public abstract class Observer extends JFrame
 {
     protected Subject subject;
 
