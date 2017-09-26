@@ -206,7 +206,7 @@ public class MainView extends Observer{
             }
             else
             {
-                new CartView();
+                new CartView(_cart);
             }
         }
         else

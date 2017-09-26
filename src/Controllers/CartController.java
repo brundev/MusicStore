@@ -41,6 +41,8 @@ public class CartController {
             String query = "INSERT INTO sale (username) VALUES (?);";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, user);
+            stmt.executeUpdate();
+
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -82,7 +84,11 @@ public class CartController {
 
         rs.next();
 
+
+
         Array a = rs.getArray(1);
+        String c []= (String[])a.getArray();
+        System.out.print(c.length);
         Integer b []= (Integer[])a.getArray();
 
         Product p;
