@@ -9,6 +9,7 @@ import SupportClasses.TableFactory;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.WindowEvent;
 
 public class ProductView extends JFrame{
     private JPanel productPanel;
@@ -21,22 +22,21 @@ public class ProductView extends JFrame{
     private JLabel artist;
     private JLabel genre;
     private Product _product;
-    private DefaultTableModel _model;
-    private TableFactory _factory;
     private CartController _controller;
 
-    public ProductView(Product product)
+    public ProductView(Product product, CartController controller)
     {
         _product = product;
+        _controller = controller;
         this.setContentPane(this.productPanel);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.pack();
         this.setVisible(true);
         this.setSize(600, 600 );
-        SetupView();
+        SetupView(this);
     }
 
-    public void SetupView()
+    public void SetupView(JFrame frame)
     {
         ImageIcon imageIcon = new ImageIcon(getClass().getResource(_product.get_coverImage()));
         Image image = imageIcon.getImage();
@@ -48,5 +48,8 @@ public class ProductView extends JFrame{
         artist.setText(_product.get_artist().get_name());
         genre.setText(_product.get_genre());
 
+        annullaButton.addActionListener(e -> frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING)));
+
+        addToCartButton.addActionListener( e -> _controller.addToCart(_product));
     }
 }

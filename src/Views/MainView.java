@@ -43,6 +43,11 @@ public class MainView extends Observer{
 
     public MainView()
     {
+        this.setContentPane(this.mainPanel);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.pack();
+        this.setVisible(true);
+        this.setSize(900, 600 );
         SetupDBConn();
         SetupView();
     }
@@ -117,7 +122,7 @@ public class MainView extends Observer{
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 int row = catalogTable.rowAtPoint(evt.getPoint());
-                new ProductView(_catalog.getCatalogProducts().get(row));
+                new ProductView(_catalog.getCatalogProducts().get(row), _cartController);
             }
         });
 
@@ -291,7 +296,7 @@ public class MainView extends Observer{
             imageIcon = new ImageIcon(getClass().getResource(p.get_coverImage()));
             image = imageIcon.getImage();
             imageIcon = new ImageIcon(image.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-            row = new Object[]{imageIcon,p.get_title(), p.get_price() + " €", p.get_description(), p.get_artist().get_name(), p.get_genre()};
+            row = new Object[]{imageIcon,p.get_title(), p.get_price() + " €", p.get_artist().get_name(), p.get_genre()};
             _model.addRow(row);
         }
     }

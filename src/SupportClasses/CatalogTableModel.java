@@ -11,7 +11,7 @@ public class CatalogTableModel extends DefaultTableModel {
 
     public CatalogTableModel()
     {
-        super(null, new String[]{"Immagine", "Titolo", "Prezzo", "Descrizione", "Autore", "Genere"});
+        super(null, new String[]{"Immagine", "Titolo", "Prezzo", "Autore", "Genere"});
     }
 
     @Override
