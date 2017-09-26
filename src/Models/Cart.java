@@ -39,6 +39,7 @@ public class Cart extends Subject{
     {
         _totalPrice -= -_cartList.get(position).get_price();
         _cartList.remove(position);
+        notifyAllObservers();
     }
 
     public User get_user() {
