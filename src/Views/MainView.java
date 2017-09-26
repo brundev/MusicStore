@@ -41,20 +41,14 @@ public class MainView extends Observer{
     private User _user;
     private TableFactory _factory;
 
-    public static void main(String args[])
-    {
-        JFrame frame = new JFrame("Music Store App");
-        frame.setContentPane(new MainView().mainPanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setSize(900,900);
-        frame.setVisible(true);
-    }
-
     public MainView()
     {
         SetupDBConn();
         SetupView();
+    }
+
+    public JPanel getMainPanel() {
+        return mainPanel;
     }
 
     public void SetupView()
@@ -221,7 +215,7 @@ public class MainView extends Observer{
         _user=null;
         loginButton.setEnabled(true);
         loginButton.setVisible(true);
-        registerButton.setText("registrati");
+        registerButton.setText("REGISTRATI");
         usernameText.setEnabled(true);
         usernameText.setVisible(true);
         passwordText.setEnabled(true);
