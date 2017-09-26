@@ -38,7 +38,7 @@ public class CartController {
 
         try {
             Connection conn = DBConnSingleton.getConn();
-            String query = "INSERT INTO sale (username) VALUES (?);";
+            String query = "INSERT INTO sale (username,products) VALUES (?,'{0}');";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, user);
             stmt.executeUpdate();
@@ -87,29 +87,31 @@ public class CartController {
 
 
         Array a = rs.getArray(1);
-        String c []= (String[])a.getArray();
-        System.out.print(c.length);
+        //String c []= (String[])a.getArray();
+        //System.out.print(c.length);
         Integer b []= (Integer[])a.getArray();
 
         Product p;
 
-        for(int i=0;i<b.length;i++)
-        {
 
-            query = "select title,price,coverimage from Products where id = ? ";
-            stmt = conn.prepareStatement(query);
-            stmt.setInt( 1,b[i]);
-            rs = stmt.executeQuery();
+            for(int i=0;i<b.length;i++)
+            {
 
-            rs.next();
+                query = "select title,price,coverimage from Products where id = ? ";
+                stmt = conn.prepareStatement(query);
+                stmt.setInt( 1,b[i]);
+                rs = stmt.executeQuery();
 
-            p = new Product();
-            p.set_code((b[i]));
-            p.set_title(rs.getString(1));
-            p.set_price(rs.getFloat(2));
-            p.set_coverImage(rs.getString(3));
-            _cart.addToCart(p);
-        }
+                rs.next();
+                if(b[i]!=0) {
+                    p = new Product();
+                    p.set_code((b[i]));
+                    p.set_title(rs.getString(1));
+                    p.set_price(rs.getFloat(2));
+                    p.set_coverImage(rs.getString(3));
+                    _cart.addToCart(p);
+                }
+            }
     }
 
 
