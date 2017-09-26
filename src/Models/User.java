@@ -4,6 +4,7 @@ package Models;
  * Created by riccardo on 16/09/17.
  */
 public class User {
+
     private String _CF;
     private String _username;
     private String _password;
@@ -13,6 +14,22 @@ public class User {
     private String _telephone;
     private String _cellphone;
     private boolean _isEmployee;
+
+    public User(){
+
+    }
+
+    public User(String _CF, String _username, String _password, String _name, String _surname, String _address, String _telephone, String _cellphone, boolean _isEmployee) {
+        this._CF = _CF;
+        this._username = _username;
+        this._password = _password;
+        this._name = _name;
+        this._surname = _surname;
+        this._address = _address;
+        this._telephone = _telephone;
+        this._cellphone = _cellphone;
+        this._isEmployee = _isEmployee;
+    }
 
     public String get_CF() {
         return _CF;

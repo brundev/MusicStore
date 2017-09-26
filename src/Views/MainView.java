@@ -55,7 +55,6 @@ public class MainView extends Observer{
     {
         SetupDBConn();
         SetupView();
-        _loginManager = new LoginManager();
     }
 
     public void SetupView()
@@ -233,9 +232,9 @@ public class MainView extends Observer{
 
     public void makeLogin()
     {
-        if(_loginManager.checkUser(usernameText.getText(), passwordText.getText()))
+        if(LoginManager.checkUser(usernameText.getText(), passwordText.getText()))
         {
-            _user = _loginManager.getUser();
+            _user = LoginManager.getUser();
 
             if(!_user.get_isEmployee()) {
                 _cart = new Cart(_user);
