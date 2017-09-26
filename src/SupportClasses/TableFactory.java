@@ -20,8 +20,6 @@ public class TableFactory {
                 break;
             case "CartView" : model = new CartTableModel();
                 break;
-            case "ProductView" : model = new ProductTableModel();
-                break;
             default : model = new DefaultTableModel();
                 break;
         }
