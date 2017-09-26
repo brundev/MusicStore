@@ -53,9 +53,9 @@ CREATE TABLE Sale(
 );
 
 INSERT INTO Products (id,title,tracklist,coverimage,price,firstadded,description,artist,genre,involvedartists,usedinstruments,productstocks)
-  VALUES(1,'animals','{"pigs,dogs,sheeps"}','indirizzolel',24,'2017-09-09','i like music',20,'rock','{"gino"}','{chitarra}',10);
+  VALUES(1,'animals','{"pigs,dogs,sheeps"}','resources/gear.png',24,'2017-09-09','i like music',20,'rock','{"gino"}','{chitarra}',10);
 INSERT INTO Products (id,title,tracklist,coverimage,price,firstadded,description,artist,genre,involvedartists,usedinstruments,productstocks)
-  VALUES(2,'meddle','{"pigs,dogs,sheeps"}','indirizzolel',24,'2015-09-09','i like music',20,'rock','{"jelly"}','{chitarra}',10);
+  VALUES(2,'meddle','{"pigs,dogs,sheeps"}','resources/gear.png',24,'2015-09-09','i like music',20,'rock','{"jelly"}','{chitarra}',10);
 
 INSERT INTO Musician (id,name,genre,birthdate,instruments) VALUES (20, 'gino','pupu','2017-02-21','{"pupu"}');
 
