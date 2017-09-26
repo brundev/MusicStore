@@ -18,7 +18,7 @@
           <text value="carrello"/>
         </properties>
       </component>
-      <scrollpane id="9aeaf" binding="_scrollPane1" custom-create="true">
+      <scrollpane id="9aeaf" binding="_scrollPane">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>

@@ -9,7 +9,7 @@ public class CartTableModel extends DefaultTableModel{
 
     public CartTableModel()
     {
-        super(null, new String[]{"Titolo", "Immagine", "Prezzo", "Descrizione", "Autore", "Genere"});
+        super(null, new String[]{"Immagine", "Titolo", "Prezzo", "Descrizione", "Autore", "Genere"});
     }
 
     @Override
