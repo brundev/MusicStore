@@ -52,12 +52,25 @@ CREATE TABLE Sale(
 	deliverytype VARCHAR(10)
 );
 
-INSERT INTO Products (id,title,tracklist,coverimage,price,firstadded,description,artist,genre,involvedartists,usedinstruments,productstocks)
-  VALUES(1,'animals','{"pigs,dogs,sheeps"}','resources/gear.png',24,'2017-09-09','i like music',20,'rock','{"gino"}','{chitarra}',10);
-INSERT INTO Products (id,title,tracklist,coverimage,price,firstadded,description,artist,genre,involvedartists,usedinstruments,productstocks)
-  VALUES(2,'meddle','{"pigs,dogs,sheeps"}','resources/gear.png',24,'2015-09-09','i like music',20,'rock','{"jelly"}','{chitarra}',10);
+INSERT INTO Musician (id,name,genre,birthdate,instruments) VALUES (1, 'Caparezza','rap','1973-10-09','{"voce"}');
+INSERT INTO Musician (id,name,genre,birthdate,instruments) VALUES (2, 'Anastacia', 'pop','1968-09-17', '{"voce"}');
+INSERT INTO Musician (id,name,genre,birthdate,instruments) VALUES (3, 'Pink Floyd', 'rock','1965-01-01', '{"voce, chitarra, batteria, percussioni, basso, tastiera, pianoforte, organo, sintetizzatore"}');
+INSERT INTO Musician (id,name,genre,birthdate,instruments) VALUES (4, 'Jimi Hendrix','rock','1942-11-27','{"voce, chitarra, basso, pianoforte"}');
+INSERT INTO Musician (id,name,genre,birthdate,instruments) VALUES (5, 'Noel Redding','rock','1945-12-25','{"voce, basso"}');
+INSERT INTO Musician (id,name,genre,birthdate,instruments) VALUES (6, 'Mitch Mitchell','rock','1947-07-09','{"batteria, percussioni"}');
+INSERT INTO Musician (id,name,genre,birthdate,instruments) VALUES (7, 'Michael Jackson','pop','1958-08-29','{"voce"}');
 
-INSERT INTO Musician (id,name,genre,birthdate,instruments) VALUES (20, 'gino','pupu','2017-02-21','{"pupu"}');
+
+INSERT INTO Products (id, title,tracklist,coverimage,price,firstadded,description,artist,genre,involvedartists,usedinstruments,productstocks)
+VALUES(1,'Prisoners 709','{"Prosopagnosia,Prisoner 709 ,La caduta di Atlante, Forever Jung, Confusianesimo, Il testo che avrei voluto scrivere,Una chiave, Ti fa stare bene, Migliora la tua memoria con un click, Larsen, Sogno di potere, La guardia, Minimoog, La finestra, Autoipnotica, Prosopagno sia"}','resources/Prisoner.png',18.99,'2017-09-15','Settimo album in studio del rapper italiano Caparezza',1,'rap rock','{"Caparezza, Max Gazzè, DMC"}','{chitarra, voce, basso, violoncello, tastiera, pianoforte, batteria, violino, viola, tromba, sassofono, trombone, corno}',100);
+INSERT INTO Products (id,title,tracklist,coverimage,price,firstadded,description,artist,genre,involvedartists,usedinstruments,productstocks)
+VALUES(2,'Evolution','{"Caught in The Middle, Redlight, Stamina, Boxer, My Everything, Nobody Loves Me Better, Reckless, Not Coming Down, Before, Pain, Why, Boomerang, Higher Livin"}','resources/Evolution.png',17.99,'2017-09-15','Settimo album in studio della cantautrice statunitense Anastacia',2,'pop','{"Anastacia"}','{voce}',100);
+INSERT INTO Products (id,title,tracklist,coverimage,price,firstadded,description,artist,genre,involvedartists,usedinstruments,productstocks)
+VALUES(3,'The Dark Side of the Moon','{"Breathe, On the Run, Time, The Great Gig in the Sky, Money, Us and Them, Any Colour You Like, Brain Damage, Eclipse"}','resources/Dark.png',17.99,'2016-02-01','Ottavo album in studio del gruppo musicale britannico Pink Floyd',3,'rock','{"Pink Floyd"}','{voce, chitarra, basso, pianoforte, organo, batteria, sassofono}',100);
+INSERT INTO Products (id,title,tracklist,coverimage,price,firstadded,description,artist,genre,involvedartists,usedinstruments,productstocks)
+VALUES (4, 'Are You Experienced', '{"Foxy Lady, Manic Depression, Red House, Can You See Me, Love or Confusion, May This Be Love, Fire, Third Stone from the Sun, Remember"}','resources/Experience.png', 16.99, '2016-02-01', 'Album di debutto della band inglese/americana The Jimi Hendrix Experience',4,'rock','{"Jimi Hendrix, Noel Redding, Mitch Mitchell"}','{voce,chitarra,pianoforte,basso,batteria,percussioni}', 100);
+INSERT INTO Products (id,title,tracklist,coverimage,price,firstadded,description,artist,genre,involvedartists,usedinstruments,productstocks)
+VALUES(5,'This is it','{"FILM DVD"}','resources/This.png',7.25,'2016-02-01','Il film documenta le prove del grande show a cui Michael stava lavorando prima della sua improvvisa scomparsa',7,'pop','{"Michael Jackson"}','{voce}',100);
 
 INSERT INTO Utente (cf, username, password, name, surname, address, telephone, cellphone, isemployee)  VALUES ('aaaaaaaaaaaaaaaa','john','a','john','jonhyllo','hello city','1234567','12345456', FALSE );
 
