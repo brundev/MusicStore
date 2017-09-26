@@ -90,7 +90,7 @@ public class CartController {
 
             c[b.length]=p.get_code();
 
-            query = "UPDATE sale SET products = '"+conn.createArrayOf(a.getBaseTypeName(),c)+"' where sale.username ILIKE ?;";
+            query = "UPDATE sale SET products = '"+conn.createArrayOf(a.getBaseTypeName(),c)+"' where sale.username ILIKE ? AND sale.saledatetime IS NULL;";
             stmt = conn.prepareStatement(query);
             stmt.setString(1,cartUser);
             stmt.executeUpdate();
