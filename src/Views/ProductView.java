@@ -32,7 +32,7 @@ public class ProductView extends JFrame{
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.pack();
         this.setVisible(true);
-        this.setSize(600, 600 );
+        this.setSize(830, 500 );
         SetupView(this);
     }
 
