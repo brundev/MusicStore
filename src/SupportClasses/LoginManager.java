@@ -8,9 +8,9 @@ import java.sql.SQLException;
 
 public class LoginManager {
 
-    private User _user;
+    private static User _user;
 
-    public boolean checkUser(String username, String password)
+    public static boolean checkUser(String username, String password)
     {
         boolean flag = false;
 
@@ -46,7 +46,7 @@ public class LoginManager {
         return flag;
     }
 
-    public User getUser()
+    public static User getUser()
     {
         return _user;
     }
