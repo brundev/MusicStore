@@ -76,4 +76,4 @@ INSERT INTO Utente (cf, username, password, name, surname, address, telephone, c
 
 INSERT INTO Utente (cf, username, password, name, surname, address, telephone, cellphone, isemployee)  VALUES ('aaaaaaaaaaaaaaaa','admin','admin','admin','admin','hello city','1234567','12345456', TRUE );
 
-INSERT INTO Sale (username, products, price, saledatetime, ip, paymenttype, deliverytype) VALUES ('john','{1,2}',1,'2016-06-22 22:10:25-04','','','');
+INSERT INTO Sale (username, products, price,saledatetime) VALUES ('john','{1,2}',1,'2016-06-22 22:10:25-04');

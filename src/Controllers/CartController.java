@@ -50,7 +50,7 @@ public class CartController {
     private boolean isCartPresent(String user){
         try {
             Connection conn = DBConnSingleton.getConn();
-            String query = "select * from sale where sale.username ILIKE ? AND saledatetime = null;";
+            String query = "select * from sale where sale.username ILIKE ? AND saledatetime is null;";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, user);
             ResultSet rs = stmt.executeQuery();
@@ -75,7 +75,7 @@ public class CartController {
             newSale(cartUser);
 
         Connection conn = DBConnSingleton.getConn();
-        String query = "select products from sale where sale.username ILIKE ?  AND saledatetime = null;";
+        String query = "select products from sale where sale.username ILIKE ?  AND saledatetime is null;";
         PreparedStatement stmt = conn.prepareStatement(query);
         stmt.setString( 1,cartUser);
         ResultSet rs = stmt.executeQuery();
@@ -90,7 +90,7 @@ public class CartController {
         for(int i=0;i<b.length;i++)
         {
 
-            query = "select title,price,coverimage from Products where id = ?  AND saledatetime = null;";
+            query = "select title,price,coverimage from Products where id = ? ";
             stmt = conn.prepareStatement(query);
             stmt.setInt( 1,b[i]);
             rs = stmt.executeQuery();
@@ -114,7 +114,7 @@ public class CartController {
 
         try {
             Connection conn = DBConnSingleton.getConn();
-            String query = "select products from sale where sale.username ILIKE ?  AND saledatetime = null;";
+            String query = "select products from sale where sale.username ILIKE ?  AND saledatetime is null;";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1,cartUser);
             ResultSet rs = stmt.executeQuery();
@@ -132,7 +132,7 @@ public class CartController {
 
             c[b.length]=p.get_code();
 
-            query = "UPDATE sale SET products = '"+conn.createArrayOf(a.getBaseTypeName(),c)+"' where sale.username ILIKE ?  AND saledatetime = null;";
+            query = "UPDATE sale SET products = '"+conn.createArrayOf(a.getBaseTypeName(),c)+"' where sale.username ILIKE ?  AND saledatetime is null;";
             stmt = conn.prepareStatement(query);
             stmt.setString(1,cartUser);
             stmt.executeUpdate();
@@ -153,7 +153,7 @@ public class CartController {
 
         try {
             Connection conn = DBConnSingleton.getConn();
-            String query = "select products from sale where sale.username ILIKE ? AND saledatetime = null;";
+            String query = "select products from sale where sale.username ILIKE ? AND saledatetime is null;";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1,cartUser);
             ResultSet rs = stmt.executeQuery();
@@ -181,7 +181,7 @@ public class CartController {
                 }
             }
 
-            query = "UPDATE sale SET products = '"+conn.createArrayOf(a.getBaseTypeName(),c)+"' where sale.username ILIKE ? AND saledatetime = null;";
+            query = "UPDATE sale SET products = '"+conn.createArrayOf(a.getBaseTypeName(),c)+"' where sale.username ILIKE ? AND saledatetime is null;";
             stmt = conn.prepareStatement(query);
             stmt.setString(1,cartUser);
             stmt.executeUpdate();
@@ -204,7 +204,7 @@ public class CartController {
 
             LocalDate localDate = LocalDate.now();
 
-            String query = "UPDATE sale SET saledatetime = ? where sale.username ILIKE ? AND saledatetime = null;";
+            String query = "UPDATE sale SET saledatetime = ? where sale.username ILIKE ? AND saledatetime is null;;";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setObject(1,localDate);
             stmt.setObject(2,cartUser);
