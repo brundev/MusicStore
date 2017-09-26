@@ -13,7 +13,7 @@ public class RegistrationManager {
 
 
     //returns -1 if already registred, 0 if error, 1 if success
-    public int registerUser(User u) {
+    public static int registerUser(User u) {
 
         if (checkRegistration(u))
             return -1;
@@ -41,7 +41,7 @@ public class RegistrationManager {
         return 0;
     }
 
-    private boolean checkRegistration(User u){
+    private static boolean checkRegistration(User u){
 
         try {
 
