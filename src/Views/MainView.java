@@ -9,6 +9,8 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.sql.SQLException;
 
@@ -62,7 +64,14 @@ public class MainView extends Observer{
         ImageIcon imageIcon = new ImageIcon(getClass().getResource("resources/cart.png"));
         Image image = imageIcon.getImage();
         imageIcon = new ImageIcon(image.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-        cartButton.setIcon(imageIcon);
+        final ImageIcon cartIcon = imageIcon;
+
+        imageIcon = new ImageIcon(getClass().getResource("resources/gear.png"));
+        image = imageIcon.getImage();
+        imageIcon = new ImageIcon(image.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        final ImageIcon gearIcon = imageIcon;
+
+        cartButton.setIcon(cartIcon);
         cartButton.setSize(30, 100);
         cartButton.setText("");
 
@@ -137,8 +146,50 @@ public class MainView extends Observer{
         cartButton.addActionListener(e -> onCartButtonClicked());
 
         //TODO gestire evento per login
-        loginButton.addActionListener( e -> makeLogin() );
-        registerButton.addActionListener( e -> JOptionPane.showMessageDialog(null, "Registrazione da fare"));//TODO registrazione
+
+        loginButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                makeLogin();
+                if(_user!=null) {
+                    loginButton.setEnabled(false);
+                    loginButton.setVisible(false);
+                    registerButton.setText("Logout");
+                    usernameText.setEnabled(false);
+                    usernameText.setVisible(false);
+                    passwordText.setEnabled(false);
+                    passwordText.setVisible(false);
+
+                }
+                else
+                {
+                    loginButton.setEnabled(true);
+                    loginButton.setVisible(true);
+                }
+
+            }
+
+            //loginButton.setEnabled(true);
+        }
+        );
+
+
+        registerButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+
+                if(_user!=null) {
+                    logout();
+                    cartButton.setIcon(cartIcon);
+
+                }
+                else {
+                    new RegistrationView();
+                    System.out.print("aaaaaaaaaaaaa");
+                }
+
+            }
+        });
+
+        //registerButton.addActionListener( e -> JOptionPane.showMessageDialog(null, "Registrazione da fare"));//TODO registrazione
         searchButton.addActionListener(e -> onSearchButtonClicked());
     }
 
@@ -164,6 +215,20 @@ public class MainView extends Observer{
         {
             JOptionPane.showMessageDialog(null, "E' necessario essere loggati per accedere al carrello");
         }
+    }
+
+    public void logout(){
+
+        _user=null;
+        loginButton.setEnabled(true);
+        loginButton.setVisible(true);
+        registerButton.setText("registrati");
+        usernameText.setEnabled(true);
+        usernameText.setVisible(true);
+        passwordText.setEnabled(true);
+        passwordText.setVisible(true);
+
+
     }
 
     public void makeLogin()
