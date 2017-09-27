@@ -11,13 +11,18 @@ import SupportClasses.TableFactory;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class CartView extends Observer {
 
     private JPanel _cartPanel;
     private JTable _table1;
     private JScrollPane _scrollPane;
+    private JButton compraButton;
+    private JButton eliminaButton;
     private DefaultTableModel _model;
     private TableFactory _factory;
     private Cart _cart;
@@ -29,10 +34,20 @@ public class CartView extends Observer {
         _cart = c;
         this.setContentPane(this._cartPanel);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+              // _cart.resetCart();
+            }
+        });
+
         this.pack();
         this.setVisible(true);
         this.setSize(400, 400 );
+
         setupView();
+
     }
 
     public void setupView()
@@ -62,6 +77,29 @@ public class CartView extends Observer {
         {
             e.printStackTrace();
         }
+
+        eliminaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for(int i = 0; i < _model.getRowCount(); i++) {
+
+                        ArrayList<Product> a = _cart.get_cartList();
+                        Product p =a.get(i);
+                        _cartController.removeFromCart(p);
+                }
+            }
+        });
+
+        compraButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+
+                new BuyView(_cart);
+
+            }
+        });
+
     }
 
     private void createUIComponents() {
@@ -83,7 +121,7 @@ public class CartView extends Observer {
                 imageIcon = new ImageIcon(getClass().getResource(p.get_coverImage()));
                 image = imageIcon.getImage();
                 imageIcon = new ImageIcon(image.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-                row = new Object[]{imageIcon, p.get_title(), p.get_price() + " €", p.get_artist().get_name(), p.get_genre()};
+                row = new Object[]{imageIcon, p.get_title(), p.get_price() + " €", p.get_artist().get_name(), p.get_genre(),false};
                 _model.addRow(row);
             }
         }

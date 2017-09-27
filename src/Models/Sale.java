@@ -8,12 +8,14 @@ import java.time.LocalDateTime;
  */
 public class Sale {
 
-    public enum PaymentType { Bonifico, CrediCard, Paypal}
-    public enum DeliveryType { CourierService, PostalService}
     private Cart _cart;
     private LocalDateTime _saleDate;
-    private PaymentType _paymentType;
-    private DeliveryType _deliveryType;
+    private String _paymentType;
+    private String _deliveryType;
+    private float _salePrice;
+    public float expressDeliveryCost=5;
+    public float postalDeliveryCost =0;
+
 
     public Cart get_cart() {
         return _cart;
@@ -31,20 +33,28 @@ public class Sale {
         this._saleDate = _saleDate;
     }
 
-    public PaymentType get_paymentType() {
+    public String get_paymentType() {
         return _paymentType;
     }
 
-    public void set_paymentType(PaymentType _paymentType) {
+    public void set_paymentType(String _paymentType) {
         this._paymentType = _paymentType;
     }
 
-    public DeliveryType get_deliveryType() {
+    public String get_deliveryType() {
         return _deliveryType;
     }
 
-    public void set_deliveryType(DeliveryType _deliveryType) {
+    public void set_deliveryType(String _deliveryType) {
         this._deliveryType = _deliveryType;
+    }
+
+    public float get_salePrice() {
+        return _salePrice;
+    }
+
+    public void set_salePrice(float _salePrice) {
+        this._salePrice = _salePrice;
     }
 
 }
