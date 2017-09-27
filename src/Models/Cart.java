@@ -15,9 +15,14 @@ public class Cart extends Subject{
 
     public Cart(User user)
     {
+
+       // Product p = new Product();
+       // p.set_code(0);
+
         _totalPrice = 0;
         _user = user;
         _cartList = new ArrayList<Product>();
+        //_cartList.add(p);
     }
 
     public ArrayList<Product> get_cartList() {
@@ -34,6 +39,7 @@ public class Cart extends Subject{
     {
         _totalPrice -= -_cartList.get(position).get_price();
         _cartList.remove(position);
+        notifyAllObservers();
     }
 
     public User get_user() {
