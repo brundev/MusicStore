@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.Cart;
+import Models.Musician;
 import Models.Product;
 import SupportClasses.DBConnSingleton;
 
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -23,15 +25,11 @@ public class CartController {
     public CartController(Cart c)
     {
         _cart = c;
+    }
 
-        try
-        {
-            setCart();
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
+    public void requestNotify()
+    {
+        _cart.notifyAllObservers();
     }
 
     public void newSale(String user){
@@ -77,18 +75,12 @@ public class CartController {
             newSale(cartUser);
 
         Connection conn = DBConnSingleton.getConn();
-        String query = "select products from sale where sale.username ILIKE ?  AND saledatetime is null;";
+        String query = "select s.products from sale as s where s.username ILIKE ?  AND s.saledatetime is null;";
         PreparedStatement stmt = conn.prepareStatement(query);
         stmt.setString( 1,cartUser);
         ResultSet rs = stmt.executeQuery();
-
         rs.next();
-
-
-
         Array a = rs.getArray(1);
-        //String c []= (String[])a.getArray();
-        //System.out.print(c.length);
         Integer b []= (Integer[])a.getArray();
 
         Product p;
@@ -97,7 +89,7 @@ public class CartController {
             for(int i=0;i<b.length;i++)
             {
 
-                query = "select title,price,coverimage from Products where id = ? ";
+                query = "select * from products join musician on products.artist = musician.id where products.id = ? ";
                 stmt = conn.prepareStatement(query);
                 stmt.setInt( 1,b[i]);
                 rs = stmt.executeQuery();
@@ -105,10 +97,30 @@ public class CartController {
                 rs.next();
                 if(b[i]!=0) {
                     p = new Product();
-                    p.set_code((b[i]));
-                    p.set_title(rs.getString(1));
-                    p.set_price(rs.getFloat(2));
-                    p.set_coverImage(rs.getString(3));
+                    p.set_code(rs.getInt(1));
+                    p.set_title(rs.getString(2));
+                    Array a1 = rs.getArray(3);
+                    ArrayList<String> b1 = new ArrayList(Arrays.asList(a));
+                    p.set_trackList(b1);
+                    p.set_coverImage(rs.getString(4));
+                    p.set_price(rs.getFloat(5));
+                    p.set_firstAddedInStore(rs.getTimestamp(6).toLocalDateTime());
+                    p.set_description(rs.getString(7));
+                    p.set_genre(rs.getString(9));
+                    Array c = rs.getArray(10);
+                    ArrayList<Musician> d = new ArrayList(Arrays.asList(c));
+                    p.set_involvedArtists(d);
+                    Array e = rs.getArray(11);
+                    ArrayList<String> f = new ArrayList(Arrays.asList(e));
+                    p.set_usedInstruments(f);
+                    p.set_productStocks(rs.getInt(12));
+                    String name = rs.getString(14);
+                    String genre = rs.getString(15);
+                    LocalDate birthDate = rs.getTimestamp(16).toLocalDateTime().toLocalDate();
+                    Array g = rs.getArray(17);
+                    ArrayList<String> instruments = new ArrayList(Arrays.asList(g));
+                    Musician m = new Musician(name, genre, birthDate, instruments);
+                    p.set_artist(m);
                     _cart.addToCart(p);
                 }
             }
