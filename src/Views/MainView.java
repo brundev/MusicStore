@@ -203,6 +203,7 @@ public class MainView extends Observer{
             if(_user.get_isEmployee())
             {
                 //TODO vista della schermata gestione employee
+                new ModifyView();
             }
             else
             {
