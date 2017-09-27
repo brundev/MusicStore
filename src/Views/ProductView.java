@@ -59,6 +59,6 @@ public class ProductView extends JFrame{
         if(_controller != null)
             _controller.addToCart(_product);
         else
-            JOptionPane.showMessageDialog(null, "E' necessario essere loggati per procedere");
+            JOptionPane.showMessageDialog(null, "E' necessario essere loggati come clienti per procedere");
     }
 }
