@@ -83,6 +83,7 @@ public class CartController {
     public void clearCart()
     {
         _cart.clear();
+        _cart.set_totalPrice(0);
     }
 
     public void setCart() throws SQLException{
@@ -184,13 +185,9 @@ public class CartController {
 
     }
 
-    public void removeFromCart(int position)
-    {
-        _cart.removeFromCart(position);
-    }
+    public void removeFromCart(int position){
 
-    public void removeFromCart(Product p){
-
+        Product p = _cart.get_cartList().get(position);
         String cartUser = _cart.get_user().get_username();
 
         try {
@@ -204,21 +201,33 @@ public class CartController {
 
 
             Array a = rs.getArray(1);
-            Integer b []= (Integer[])a.getArray();
+            Integer b[]= (Integer[])a.getArray();
             Integer c[] = new Integer[b.length-1];
 
             int ct=0;
-            int position= 0;
-            boolean removed=false;
+            //boolean removed=false;
 
-            for(int i=0;i<b.length;i++){
-                if(p.get_code()!=b[i] || removed) {
-                    c[ct] = b[i];
+            /*for(Integer i : b)
+            {
+                if(p.get_code() != b[i] || removed)
+                {
+                    c.add(i);
+                }
+                else
+                {
+                    removed = true;
+                }
+            }*/
+
+            for(int i=0;i<b.length-1;i++)
+            {
+                if(p.get_code()!=b[i])
+                {
+                    c[i] = b[i];
                     ct++;
                 }
                 else
                 {
-                    removed=true;
                     position=i;
                 }
             }
