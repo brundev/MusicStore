@@ -9,6 +9,7 @@ import SupportClasses.Subject;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.time.LocalDateTime;
 
 /**
@@ -51,6 +52,8 @@ public class BuyView extends Observer {
                 onBuyClick();
             }
         });
+
+        annullaButton.addActionListener(e -> this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING)));
 
         spedizioneCombo.addActionListener(new ActionListener() {
             @Override
