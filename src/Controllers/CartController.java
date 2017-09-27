@@ -67,6 +67,24 @@ public class CartController {
         return false;
     }
 
+    public void initCart()
+    {
+        try
+        {
+            clearCart();
+            setCart();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void clearCart()
+    {
+        _cart.clear();
+    }
+
     public void setCart() throws SQLException{
 
         String cartUser = _cart.get_user().get_username();
@@ -166,6 +184,10 @@ public class CartController {
 
     }
 
+    public void removeFromCart(int position)
+    {
+        _cart.removeFromCart(position);
+    }
 
     public void removeFromCart(Product p){
 
@@ -206,7 +228,7 @@ public class CartController {
             stmt.setString(1,cartUser);
             stmt.executeUpdate();
 
-            _cart.removeFromCart(position-1);
+            _cart.removeFromCart(position);
 
         }catch (SQLException e){
             e.printStackTrace();

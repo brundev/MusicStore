@@ -35,6 +35,12 @@ public class Cart extends Subject{
         notifyAllObservers();
     }
 
+    public void clear()
+    {
+        _cartList.clear();
+        notifyAllObservers();
+    }
+
     public void removeFromCart(int position)
     {
         _totalPrice -= -_cartList.get(position).get_price();
@@ -42,9 +48,7 @@ public class Cart extends Subject{
         notifyAllObservers();
     }
 
-    public void resetCart(){
-        _cartList=null;
-    }
+    //public void resetCart(){_cartList=null;}
 
     public User get_user() {
         return _user;
