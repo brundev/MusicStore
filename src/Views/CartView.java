@@ -69,36 +69,16 @@ public class CartView extends Observer {
         _cartController = new CartController(_cart);
         _table1.setVisible(true);
         _scrollPane.setViewportView(_table1);
-        try
-        {
-            _cartController.setCart();
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-        }
+        _cartController.initCart();
 
-        eliminaButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for(int i = 0; i < _model.getRowCount(); i++) {
-
-                        ArrayList<Product> a = _cart.get_cartList();
-                        Product p =a.get(i);
-                        _cartController.removeFromCart(p);
+        eliminaButton.addActionListener(e ->
+                {
+                    int pos = _cart.get_cartList().size();
+                    _cartController.removeFromCart(pos-1);
                 }
-            }
-        });
+        );
 
-        compraButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-
-                new BuyView(_cart);
-
-            }
-        });
+        compraButton.addActionListener(e -> new BuyView(_cart));
 
     }
 
