@@ -42,6 +42,10 @@ public class Cart extends Subject{
         notifyAllObservers();
     }
 
+    public void resetCart(){
+        _cartList=null;
+    }
+
     public User get_user() {
         return _user;
     }

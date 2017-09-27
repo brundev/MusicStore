@@ -32,7 +32,7 @@ public class CartController {
         _cart.notifyAllObservers();
     }
 
-    public void newSale(String user){
+    public static void newSale(String user){
 
         try {
             Connection conn = DBConnSingleton.getConn();
@@ -206,7 +206,7 @@ public class CartController {
             stmt.setString(1,cartUser);
             stmt.executeUpdate();
 
-            _cart.removeFromCart(position);
+            _cart.removeFromCart(position-1);
 
         }catch (SQLException e){
             e.printStackTrace();
@@ -214,30 +214,6 @@ public class CartController {
 
     }
 
-    public void buyCart(){
 
-
-        String cartUser = _cart.get_user().get_username();
-
-        try {
-            Connection conn = DBConnSingleton.getConn();
-
-            LocalDate localDate = LocalDate.now();
-
-            String query = "UPDATE sale SET saledatetime = ? where sale.username ILIKE ? AND saledatetime is null;;";
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setObject(1,localDate);
-            stmt.setObject(2,cartUser);
-            stmt.executeUpdate();
-
-            newSale(cartUser);
-
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-
-
-
-    }
 
 }
